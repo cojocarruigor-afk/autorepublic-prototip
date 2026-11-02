@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Site nou AutoRepublic</title>
+<link rel="icon" href="v1/img/favicon-32.png" sizes="32x32">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Unbounded:wght@700;800&display=swap">
+<style>
+/* Pagina de start: cele două prototipuri, unul lângă altul, pe negrul brandului */
+:root{
+  --bg:#000; --panel:#0f0d0e; --line:#2b2627; --fg:#f2eded; --mist:#aaa2a4; --red:#C01C2D; --red-hi:#E0283A; --ph:#FFE14D;
+  --display:"Unbounded","Arial Black",system-ui,sans-serif;
+  --body:"Onest",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 1rem/1.55 var(--body);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding-block:32px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:40px}
+header{display:grid;gap:18px}
+header img{height:30px;width:auto}
+h1{margin:0;font:800 clamp(2rem,7vw,3.4rem)/1.02 var(--display);letter-spacing:-.03em;text-wrap:balance}
+.lead{margin:0;max-width:62ch;color:#ddd6d8;font-size:1.08rem}
+.versions{display:grid;gap:18px}
+@media (min-width:860px){.versions{grid-template-columns:1fr 1fr}}
+.v{display:grid;grid-template-rows:auto 1fr;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel);min-width:0}
+.v img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;display:block;border-bottom:1px solid var(--line)}
+.v-b{display:grid;gap:14px;align-content:start;padding:22px}
+.v h2{margin:0;font:700 1.3rem/1.2 var(--display);letter-spacing:-.02em}
+.v h2 span{display:block;margin-top:6px;font:500 .95rem var(--body);letter-spacing:0;color:var(--mist)}
+.v ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.v li{display:grid;grid-template-columns:20px 1fr;gap:10px}
+.v li::before{content:"";width:16px;height:5px;margin-top:.65em;background:var(--red);transform:skewX(-40deg)}
+.acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:.7em 1.15em;border-radius:8px;border:2px solid transparent;font:600 1rem/1.2 var(--body);text-decoration:none;color:#fff;transition:background-color .15s,border-color .15s}
+.btn-red{background:var(--red)}
+.btn-red:hover{background:var(--red-hi)}
+.btn-line{border-color:rgba(255,255,255,.4)}
+.btn-line:hover{border-color:#fff}
+.btn:focus-visible{outline:3px solid var(--red-hi);outline-offset:2px}
+.notes{display:grid;gap:10px;padding:22px;border:1px solid var(--line);border-radius:14px}
+.notes h2{margin:0;font:700 1.05rem var(--body)}
+.notes ul{margin:0;padding-left:1.1em;display:grid;gap:8px;color:#d6cfd1}
+.ph{background:var(--ph);color:#211b00;padding:0 4px;border-radius:3px;font-weight:600}
+footer{color:var(--mist);font-size:.88rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img src="v1/img/logo.png" alt="AutoRepublic" width="207" height="30">
+    <h1>Site nou AutoRepublic</h1>
+    <p class="lead">Două prototipuri pentru discuția cu directorul. Au aceleași pagini, aceleași texte și același SEO. Diferă designul și instrumentele care aduc programări.</p>
+  </header>
+
+  <div class="versions">
+    <section class="v">
+      <img src="v1-acasa.jpg" alt="Prima pagină din versiunea 1" width="605" height="381">
+      <div class="v-b">
+        <h2>Versiunea 1<span>Clasică, poze color</span></h2>
+        <ul>
+          <li>Programare online în 3 pași</li>
+          <li>Alegerea după simptom: ce simți la mașină</li>
+          <li>Bară de contact rapid pe telefon: Sună, WhatsApp, Viber</li>
+        </ul>
+        <div class="acts">
+          <a class="btn btn-red" href="v1/index.html">Deschide versiunea 1</a>
+          <a class="btn btn-line" href="v1/ru/index.html" lang="ru">На русском</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="v">
+      <img src="v2-acasa.jpg" alt="Prima pagină din versiunea 2" width="600" height="377">
+      <div class="v-b">
+        <h2>Versiunea 2<span>Bordul mașinii</span></h2>
+        <ul>
+          <li>8 martori de bord în primul ecran: atingi unul și afli ce înseamnă</li>
+          <li>Poze alb-negru cu roșul păstrat, ca pe colantul mașinii</li>
+          <li>„Sună-mă înapoi în 15 minute”, programare cu turometru, vremea din Chișinău</li>
+        </ul>
+        <div class="acts">
+          <a class="btn btn-red" href="v2/index.html">Deschide versiunea 2</a>
+          <a class="btn btn-line" href="v2/ru/index.html" lang="ru">На русском</a>
+          <a class="btn btn-line" href="v2/martori-de-bord/index.html">Ghidul martorilor</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="notes">
+    <h2>De știut când le arăți</h2>
+    <ul>
+      <li>Sunt prototipuri. Textele marcate cu <span class="ph">galben</span> se completează cu date reale: prețuri, recenzii, echipă, garanție.</li>
+      <li>Formularele de programare și „Sună-mă înapoi” nu trimit încă cererile. Legătura cu CRM-ul se face la lansare.</li>
+      <li>Butoanele Sună, WhatsApp și Viber deschid aplicațiile de pe telefon cu numărul real al atelierului.</li>
+      <li>Pe telefon, folosește meniul și bara de jos, la fel ca un client.</li>
+    </ul>
+  </section>
+
+  <footer>Prototip pregătit pe 2 noiembrie 2026. Paginile nu apar în Google până la lansarea pe autorepublic.md.</footer>
+</div>
+</body>
+</html>

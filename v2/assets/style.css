@@ -1,0 +1,597 @@
+/* AutoRepublic: stil pornit de la telefon.
+   Brandul: roșul din logo pe negru pur, ca în pozele de pe social. Motivul vizual: dunga oblică roșie de pe colantul mașinii. */
+@font-face{font-family:"Onest";font-style:normal;font-weight:400 700;font-display:swap;src:url(fonts/onest-cyrillic.woff2) format("woff2");unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116}
+@font-face{font-family:"Onest";font-style:normal;font-weight:400 700;font-display:swap;src:url(fonts/onest-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:"Unbounded";font-style:normal;font-weight:700 800;font-display:swap;src:url(fonts/unbounded-cyrillic.woff2) format("woff2");unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116}
+@font-face{font-family:"Unbounded";font-style:normal;font-weight:700 800;font-display:swap;src:url(fonts/unbounded-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:"Onest";font-style:normal;font-weight:400 700;font-display:swap;src:url(fonts/onest-latin-ext.woff2) format("woff2");unicode-range:U+0102-0103,U+015E-015F,U+0162-0163,U+0218-021B}
+@font-face{font-family:"Unbounded";font-style:normal;font-weight:700 800;font-display:swap;src:url(fonts/unbounded-latin-ext.woff2) format("woff2");unicode-range:U+0102-0103,U+015E-015F,U+0162-0163,U+0218-021B}
+[hidden]{display:none!important}
+
+:root{
+  --red:#C01C2D;       /* roșul logo-ului (#BD1B2C măsurat), puțin mai deschis pentru butoane */
+  --red-hi:#DB2639;    /* hover, focus, roșu pe negru */
+  --red-ink:#A3111F;   /* text roșu pe fundal deschis, contrast AA */
+  --red-soft:#F6E4E6;
+  --black:#000;
+  --ink:#161214;
+  --paper:#F3F1F1;
+  --white:#fff;
+  --steel:#5C5557;     /* text secundar pe deschis */
+  --mist:#ABA3A5;      /* text secundar pe negru */
+  --line:#E2DCDC;
+  --line-dk:#2B2627;
+  --go:#22A35C;
+  --ph:#FFE14D;
+  --display:"Unbounded","Arial Black",system-ui,sans-serif;
+  --body:"Onest",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --r:12px;
+  --top:64px;
+  --amber:#FFB21E;     /* martor galben */
+  --lamp-red:#FF4646;  /* martor roșu, mai luminos ca să strălucească pe negru */
+  --ease-out:cubic-bezier(.23,1,.32,1);
+  --ease-in-out:cubic-bezier(.77,0,.175,1);
+  --ease-drawer:cubic-bezier(.32,.72,0,1);
+  color-scheme:light;
+  interpolate-size:allow-keywords;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--top) + 16px)}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1rem/1.6 var(--body);-webkit-font-smoothing:antialiased;padding-bottom:calc(62px + env(safe-area-inset-bottom,0px))}
+body.no-scroll{overflow:hidden}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+p{margin:0}
+h1,h2,h3{margin:0;text-wrap:balance}
+h1,h2{font-family:var(--display);font-weight:700;line-height:1.08;letter-spacing:-.025em}
+h1{font-size:clamp(2rem,6.6vw,3.4rem)}
+h2{font-size:clamp(1.45rem,4.4vw,2.3rem)}
+h3{font:700 1.08rem/1.3 var(--body)}
+.i{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:-9999px;top:8px;z-index:100;background:var(--white);color:var(--ink);padding:10px 14px;border-radius:8px}
+.skip:focus{left:16px}
+:focus-visible{outline:3px solid var(--red-hi);outline-offset:2px}
+
+.wrap{max-width:1200px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.narrow{max-width:860px}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+
+/* Butoane: minim 48px, ușor de atins cu degetul */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55em;min-height:48px;padding:.7em 1.15em;border-radius:8px;border:2px solid transparent;font:600 1rem/1.2 var(--body);text-decoration:none;cursor:pointer;transition:background-color .15s,color .15s,border-color .15s,transform 160ms var(--ease-out);text-align:center}
+.btn-red{background:var(--red);color:#fff}
+.btn-red:hover{background:var(--red-hi)}
+.btn-ghost{border-color:rgba(255,255,255,.45);color:#fff;background:transparent}
+.btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.btn-white{background:#fff;color:var(--ink)}
+.btn-white:hover{background:var(--paper)}
+.btn-line{border-color:var(--ink);color:var(--ink);background:transparent}
+.btn-line:hover{background:var(--ink);color:#fff}
+.btn-lg{min-height:56px;font-size:1.05rem;padding-inline:1.4em}
+.btn-sm{min-height:40px;padding:.45em .9em;font-size:.93rem}
+.btn[disabled]{opacity:.55;cursor:progress}
+
+/* Marcaj prototip: ce trebuie completat cu date reale */
+.proto .ph{background:var(--ph);color:#211b00;outline:2px dashed #A68A00;outline-offset:1px;border-radius:3px;padding:0 4px}
+.proto-bar{background:var(--ph);color:#211b00;font-size:.82rem;line-height:1.35;text-align:center;padding:6px 16px}
+
+/* Antet */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:#000;z-index:60}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:#000;color:#fff;border-bottom:1px solid #1c1819}
+.top-in{display:flex;align-items:center;gap:12px;height:var(--top)}
+.logo{display:block;flex:none}
+.logo img{height:30px;width:auto}
+.nav{display:none;gap:2px;margin-left:auto}
+.nav a{padding:8px 12px;border-radius:6px;text-decoration:none;font-weight:500;color:#e8e2e3}
+.nav a:hover{color:#fff;background:#1d191a}
+.nav a[aria-current="page"]{color:#fff;box-shadow:inset 0 -2px 0 var(--red)}
+.top-act{display:flex;align-items:center;gap:4px;margin-left:auto}
+.tel{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 10px;font-weight:600;text-decoration:none;color:#fff}
+.tel span{display:none}
+.lang{display:inline-grid;place-items:center;min-width:40px;min-height:36px;padding:0 8px;border:1px solid #3a3436;border-radius:6px;font-size:.82rem;font-weight:600;text-decoration:none;color:#e8e2e3}
+.lang:hover{border-color:#fff;color:#fff}
+.top .btn{display:none}
+.menu-btn{display:grid;place-items:center;width:44px;height:44px;margin-right:-8px;border:0;background:none;color:#fff;cursor:pointer}
+.menu-btn .i{width:26px;height:26px}
+.menu-btn[aria-expanded="true"] .i-open,.menu-btn[aria-expanded="false"] .i-close{display:none}
+.menu{position:fixed;inset:calc(var(--top) + env(safe-area-inset-top,0px)) 0 0;z-index:49;background:#000;color:#fff;overflow:auto;padding-block:8px calc(120px + env(safe-area-inset-bottom,0px))}
+.menu-in{display:grid;gap:28px}
+.menu nav a{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid var(--line-dk);font:700 1.35rem/1.2 var(--display);letter-spacing:-.02em;text-decoration:none}
+.menu nav a .i{color:var(--red-hi)}
+.menu-act{display:grid;gap:10px}
+@media (min-width:480px){.tel span{display:inline}}
+@media (min-width:760px){.top .btn{display:inline-flex;margin-left:6px}}
+@media (min-width:1100px){
+  .nav{display:flex}
+  .top-act{margin-left:12px}
+  .menu-btn,.menu{display:none}
+  body{padding-bottom:0}
+}
+
+/* Bara de contact rapid, fixă jos pe telefon */
+.mbar{position:fixed;inset:auto 0 0;z-index:45;display:grid;grid-template-columns:1fr 1fr 1fr 1.35fr;background:#000;border-top:1px solid #241f20;padding:0 env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
+.mbar a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:62px;color:#fff;text-decoration:none;font-size:.74rem;font-weight:600}
+.mbar a+a{border-left:1px solid #241f20}
+.mbar .i{width:22px;height:22px}
+.mbar .mbar-main{background:var(--red);border-left:0}
+@media (min-width:1100px){.mbar{display:none}}
+
+/* Statut program: deschis / închis acum */
+.status{display:inline-flex;align-items:center;gap:9px;font-size:.92rem;font-weight:500}
+.status::before{content:"";flex:none;width:9px;height:9px;border-radius:50%;background:var(--mist)}
+.status.is-open::before{background:var(--go);box-shadow:0 0 0 4px rgba(34,163,92,.22)}
+.status.is-closed::before{background:var(--red-hi)}
+
+/* Hero */
+.hero{position:relative;isolation:isolate;overflow:hidden;background:#000;color:#fff;clip-path:polygon(0 0,100% 0,100% 100%,0 calc(100% - 40px))}
+.hero-bg{position:absolute;inset:0;z-index:-2}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:35% 30%}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1) 0%,rgba(0,0,0,.5) 28%,rgba(0,0,0,.9) 52%,#000 78%)}
+.hero-in{display:grid;gap:18px;justify-items:start;padding-block:clamp(170px,40vw,280px) 96px}
+.hero .status{color:#ece6e7}
+.hero h1{font-size:clamp(2.5rem,10.5vw,5.4rem);font-weight:800;line-height:.98;letter-spacing:-.035em;max-width:9.5ch}
+.hero-lead{font-size:clamp(1.12rem,3.8vw,1.4rem);line-height:1.45;max-width:30ch;color:#f1ebec}
+.hero-cta{display:grid;gap:10px;width:100%;margin-top:4px}
+.hero-facts{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px 20px;color:#d6cfd1;font-size:.95rem}
+.hero-facts li{display:flex;align-items:center;gap:8px}
+.hero-facts .i{width:18px;height:18px;color:var(--red-hi)}
+.livery{position:absolute;right:-60px;bottom:58px;width:min(70vw,820px);height:14px;background:var(--red);transform:skewX(-42deg);transform-origin:right center;animation:livery 700ms var(--ease-out) .25s both;z-index:-1}
+.livery::before{content:"";position:absolute;right:90px;top:-24px;width:58%;height:7px;background:var(--red)}
+@keyframes livery{from{transform:skewX(-42deg) scaleX(0)}to{transform:skewX(-42deg) scaleX(1)}}
+@media (min-width:600px){.hero-cta{display:flex;flex-wrap:wrap;width:auto}}
+@media (min-width:900px){
+  .hero-bg{left:36%}
+  .hero-bg img{object-position:30% 45%}
+  .hero-bg::after{background:linear-gradient(90deg,#000 0%,rgba(0,0,0,.75) 22%,rgba(0,0,0,.1) 60%),linear-gradient(0deg,rgba(0,0,0,.65),transparent 40%)}
+  .hero-in{padding-block:120px 140px}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* Secțiuni */
+.sec{padding-block:clamp(56px,9vw,104px)}
+.sec-white{background:#fff}
+.sec-dark{background:#000;color:#fff}
+.sec-head{display:grid;gap:12px;margin-bottom:clamp(24px,4vw,40px);max-width:48rem}
+.sec-head p{color:var(--steel);font-size:1.07rem;max-width:62ch}
+.sec-dark .sec-head p{color:var(--mist)}
+.more{margin-top:24px}
+.more a{font-weight:600;color:var(--red-ink)}
+.two{display:grid;gap:40px}
+.two h2{margin-bottom:20px;font-size:clamp(1.3rem,3.6vw,1.8rem)}
+@media (min-width:860px){.two{grid-template-columns:1fr 1fr;gap:56px}}
+
+/* Listă cu dungă oblică: motivul de pe mașină */
+.slash{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.slash li{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start}
+.slash li::before{content:"";width:18px;height:6px;margin-top:.62em;background:var(--red);transform:skewX(-40deg)}
+
+/* Alege simptomul */
+.chips{display:none;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.js .chips{display:flex}
+.chip{appearance:none;min-height:44px;padding:10px 16px;border:1.5px solid var(--line);border-radius:999px;background:#fff;color:var(--ink);font:500 .96rem/1.2 var(--body);cursor:pointer;text-align:left}
+.chip:hover{border-color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.panels{display:grid;gap:12px}
+.panel{display:grid;gap:12px;padding:22px;scroll-margin-bottom:84px;background:#fff;border-radius:0 var(--r) var(--r) 0;border-left:5px solid var(--red)}
+.panel p{color:var(--steel);max-width:60ch}
+.js .panel:not(.on){display:none}
+.js .panel.on{animation:rise .25s ease-out}
+@keyframes rise{from{opacity:0;transform:translateY(6px)}}
+
+/* Lista de servicii */
+.svc-list{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.svc{display:grid;grid-template-columns:46px 1fr 18px;gap:14px;align-items:center;padding:16px;background:#fff;text-decoration:none}
+.svc:hover{background:#FBF8F8}
+.svc:hover .chev{transform:translateX(3px);color:var(--red)}
+.svc-ic,.card-ic{display:grid;place-items:center;width:46px;height:46px;border-radius:10px;background:var(--red-soft);color:var(--red-ink)}
+.svc-ic .i,.card-ic .i{width:24px;height:24px}
+.svc b{display:block;font-weight:700;line-height:1.3}
+.svc-t span{display:block;color:var(--steel);font-size:.92rem;line-height:1.4;margin-top:2px}
+.chev{width:18px;height:18px;color:var(--mist);transition:transform .15s}
+@media (min-width:700px){.svc-list{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1100px){.svc-list{grid-template-columns:repeat(3,1fr)}}
+
+/* Carduri cu poză (hub servicii, servicii înrudite) */
+.cards{display:grid;gap:16px}
+@media (min-width:600px){.cards{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1000px){.cards{grid-template-columns:repeat(3,1fr)}}
+.card{display:flex;flex-direction:column;background:#fff;border-radius:var(--r);overflow:hidden;text-decoration:none;border:1px solid var(--line);transition:border-color .15s}
+.card:hover{border-color:var(--ink)}
+.card img{aspect-ratio:16/10;object-fit:cover;width:100%;background:#111}
+.card-b{display:grid;gap:6px;padding:18px}
+.card-b .card-ic{margin-top:-42px;border:3px solid #fff;background:var(--red);color:#fff}
+.card-b b{font-size:1.1rem}
+.card-b > span:last-child{color:var(--steel);font-size:.94rem;line-height:1.45}
+
+/* Sezon */
+.season{background:#000;color:#fff;clip-path:polygon(0 32px,100% 0,100% calc(100% - 32px),0 100%);padding-block:clamp(80px,11vw,128px)}
+.season-in{display:grid;gap:32px;align-items:center}
+.season-txt{display:grid;gap:16px;justify-items:start}
+.season-txt > p{color:var(--mist);max-width:44ch}
+.season-range{color:var(--red-hi)!important;font-weight:600}
+.season .slash{margin-block:4px 8px}
+.season-img img{border-radius:var(--r);width:100%;aspect-ratio:3/2;object-fit:cover}
+@media (min-width:900px){.season-in{grid-template-columns:1fr 1.1fr;gap:56px}}
+
+/* Pașii vizitei: secvență reală, de aceea numerotați */
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:18px;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:48px 1fr;gap:4px 16px}
+.steps li::before{content:counter(s);grid-row:span 2;display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--ink);color:#fff;font:800 1.15rem/1 var(--display)}
+.steps b{font-weight:700;padding-top:2px}
+.steps span{color:var(--steel);font-size:.95rem;line-height:1.45}
+@media (min-width:980px){
+  .steps{grid-template-columns:repeat(5,1fr);gap:24px}
+  .steps li{grid-template-columns:1fr;position:relative}
+  .steps li::before{grid-row:auto;margin-bottom:10px}
+  .steps li:not(:last-child)::after{content:"";position:absolute;top:23px;left:60px;right:-12px;height:2px;background:var(--line)}
+}
+
+/* De ce noi */
+.why{display:grid;gap:8px 32px}
+.why > div{display:grid;gap:8px;align-content:start;padding:20px 0;border-top:2px solid var(--ink)}
+.why p{color:var(--steel)}
+@media (min-width:700px){.why{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1100px){.why{grid-template-columns:repeat(3,1fr)}}
+
+/* Lucrări: înainte / după */
+.gal{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.gal figure{margin:0;position:relative;display:grid;gap:8px}
+.gal img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:8px;background:#111}
+.gal figcaption{font-size:.9rem;color:var(--steel)}
+.ba{position:absolute;top:10px;padding:3px 8px;border-radius:4px;background:rgba(0,0,0,.78);color:#fff;font-size:.75rem;font-weight:600}
+.ba-l{left:10px}
+.ba-r{right:10px}
+@media (min-width:900px){.gal{grid-template-columns:repeat(4,1fr);gap:16px}}
+
+/* TikTok */
+.tt{display:grid;gap:28px;align-items:center}
+.tt-txt{display:grid;gap:16px;justify-items:start}
+.tt-txt p{color:var(--mist);max-width:46ch}
+.tt-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.tt-tiles a{position:relative;display:block;border-radius:10px;overflow:hidden}
+.tt-tiles img{aspect-ratio:9/16;object-fit:cover;width:100%;transition:transform .3s}
+.tt-tiles a:hover img{transform:scale(1.04)}
+.tt-tiles .i{position:absolute;inset:50% auto auto 50%;width:40px;height:40px;transform:translate(-50%,-50%);color:#fff;filter:drop-shadow(0 2px 8px rgba(0,0,0,.6))}
+@media (min-width:900px){.tt{grid-template-columns:1fr 1.2fr;gap:56px}}
+
+/* Recenzii */
+.reviews{display:grid;gap:14px}
+@media (min-width:860px){.reviews{grid-template-columns:repeat(3,1fr)}}
+.review{display:grid;gap:12px;align-content:start;padding:22px;background:#fff;border:1px solid var(--line);border-radius:var(--r)}
+.stars{display:flex;gap:2px;color:#E8A317}
+.stars .i{width:18px;height:18px}
+.review footer{font-weight:600;font-size:.94rem}
+
+/* Întrebări frecvente */
+.faq{border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{position:relative;list-style:none;cursor:pointer;padding:18px 44px 18px 0;font-weight:600;font-size:1.04rem;line-height:1.4}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";position:absolute;right:10px;top:50%;width:11px;height:11px;border-right:2px solid var(--red);border-bottom:2px solid var(--red);transform:translateY(-75%) rotate(45deg);transition:transform .2s}
+.faq details[open] summary::after{transform:translateY(-25%) rotate(-135deg)}
+.faq details p{padding:0 0 20px;color:var(--steel);max-width:68ch}
+
+/* Locație */
+.loc{display:grid;gap:24px;align-items:stretch}
+.loc-info{display:grid;gap:18px;align-content:start}
+.loc-addr{display:flex;gap:12px;font-size:1.08rem;line-height:1.45}
+.loc-addr .i{width:24px;height:24px;color:var(--red);margin-top:2px}
+.hours{display:grid;grid-template-columns:auto 1fr;gap:6px 20px;margin:0;font-variant-numeric:tabular-nums}
+.hours dt{color:var(--steel)}
+.hours dd{margin:0;font-weight:600}
+.map{position:relative;min-height:300px;border-radius:var(--r);overflow:hidden;background:#141112 radial-gradient(circle at 30% 40%,#2a2425,#000 70%);display:grid;place-items:center;color:#fff;text-align:center}
+.map iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.map-in{display:grid;gap:14px;justify-items:center;padding:24px}
+.map-in > .i{width:44px;height:44px;color:var(--red-hi)}
+@media (min-width:860px){.loc{grid-template-columns:1fr 1.3fr}.map{min-height:380px}}
+.sec-dark .hours dt{color:var(--mist)}
+
+/* Bandă de programare */
+.cta-band{background:var(--red);color:#fff;clip-path:polygon(0 28px,100% 0,100% 100%,0 100%);padding-block:76px 64px}
+.cta-in{display:grid;gap:24px;align-items:center}
+.cta-in p{color:#ffe3e6;margin-top:10px;font-size:1.07rem}
+.cta-band .btn-ghost{border-color:rgba(255,255,255,.6)}
+@media (min-width:980px){.cta-in{grid-template-columns:1fr auto}}
+
+/* Hero pagini interioare */
+.phero{background:#000;color:#fff;padding-block:24px 64px;clip-path:polygon(0 0,100% 0,100% 100%,0 calc(100% - 28px))}
+.crumbs ol{list-style:none;margin:0 0 28px;padding:0;display:flex;flex-wrap:wrap;gap:4px 8px;font-size:.86rem;color:var(--mist)}
+.crumbs li+li::before{content:"/";margin-right:8px;color:#5b5355}
+.crumbs a{text-decoration:none}
+.crumbs a:hover{color:#fff;text-decoration:underline}
+.phero-grid{display:grid;gap:28px;align-items:center}
+.phero-txt{display:grid;gap:18px;justify-items:start}
+.phero .lead{font-size:1.1rem;line-height:1.55;color:#e6e0e1;max-width:62ch}
+.phero-img img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--r)}
+.mchips{display:flex;flex-wrap:wrap;gap:8px}
+.mchip{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border:1px solid #332d2f;border-radius:999px;background:#151112;font-size:.9rem}
+.mchip .i{width:17px;height:17px;color:var(--red-hi)}
+.date{color:var(--mist);font-size:.9rem}
+@media (min-width:900px){.phero-grid{grid-template-columns:1.25fr .75fr;gap:56px}.phero{padding-block:28px 88px}}
+
+/* Prețuri */
+.plist{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.plist li{display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.plist b{white-space:nowrap;font-variant-numeric:tabular-nums}
+.pgroups{display:grid;gap:36px}
+@media (min-width:900px){.pgroups{grid-template-columns:1fr 1fr;gap:40px 56px}}
+.pgroup h2{font-size:1.2rem;margin-bottom:8px;letter-spacing:-.01em}
+.pgroup h2 a{text-decoration:none}
+.pgroup h2 a:hover{color:var(--red-ink)}
+.note{color:var(--steel);font-size:.95rem;margin-top:24px}
+
+/* Echipa */
+.team{display:grid;gap:14px}
+@media (min-width:760px){.team{grid-template-columns:repeat(3,1fr)}}
+.person{display:grid;grid-template-columns:64px 1fr;gap:14px;align-items:center;padding:18px;background:#fff;border:1px solid var(--line);border-radius:var(--r)}
+.avatar{width:64px;height:64px;border-radius:50%;background:var(--paper);display:grid;place-items:center;color:var(--mist)}
+.avatar .i{width:30px;height:30px}
+.person span{display:block;color:var(--steel);font-size:.92rem}
+.amen{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.amen li{display:flex;align-items:center;gap:10px;padding:14px;background:#fff;border:1px solid var(--line);border-radius:10px;font-weight:500;line-height:1.3}
+.amen .i{color:var(--red);flex:none}
+@media (min-width:900px){.amen{grid-template-columns:repeat(3,1fr)}}
+
+/* Contact */
+.ways{display:grid;gap:12px}
+@media (min-width:700px){.ways{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1100px){.ways{grid-template-columns:repeat(4,1fr)}}
+.way{display:grid;gap:6px;padding:20px;background:#fff;border:1px solid var(--line);border-radius:var(--r);text-decoration:none}
+.way:hover{border-color:var(--ink)}
+.way .i{width:28px;height:28px;color:var(--red)}
+.way span{color:var(--steel);font-size:.92rem;overflow-wrap:anywhere}
+
+/* Blog */
+.posts{display:grid;gap:16px}
+@media (min-width:760px){.posts{grid-template-columns:repeat(2,1fr)}}
+.article{max-width:720px}
+.article > * + *{margin-top:18px}
+.article h2{font-size:clamp(1.25rem,3.4vw,1.6rem);margin-top:40px}
+.article ul{padding-left:1.2em;display:grid;gap:8px}
+.article figure{margin:0}
+.article figure img{border-radius:var(--r);width:100%}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:#fff}
+.tbl table{border-collapse:collapse;width:100%;min-width:460px;font-size:.96rem}
+.tbl th,.tbl td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line)}
+.tbl th{background:var(--paper);font-weight:600}
+.tbl tr:last-child td{border-bottom:0}
+.svc-box{display:grid;gap:12px;justify-items:start;padding:22px;margin-top:40px;background:#fff;border-left:5px solid var(--red);border-radius:0 var(--r) var(--r) 0}
+.svc-box p{color:var(--steel)}
+
+/* Programare */
+.book{display:grid;gap:24px;align-items:start}
+@media (min-width:980px){.book{grid-template-columns:1.6fr 1fr;gap:40px}}
+.form,.done{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:clamp(18px,4vw,32px)}
+.step{border:0;margin:0;padding:0;min-width:0;display:grid;gap:18px}
+.js .step:not(.on){display:none}
+.step legend{padding:0;margin-bottom:6px;font:700 clamp(1.25rem,3.8vw,1.6rem)/1.15 var(--display);letter-spacing:-.02em}
+.hint{color:var(--steel);font-size:.9rem}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;width:1px;height:1px}
+.opt span{display:inline-flex;align-items:center;min-height:46px;padding:10px 15px;border:1.5px solid var(--line);border-radius:999px;background:#fff;font-weight:500;cursor:pointer;user-select:none}
+.opt span:hover{border-color:var(--ink)}
+.opt input:checked + span{background:var(--ink);border-color:var(--ink);color:#fff}
+.opt input:focus-visible + span{outline:3px solid var(--red-hi);outline-offset:2px}
+.opt[hidden]{display:none}
+.field{display:grid;gap:7px}
+.field label,.lbl{font-weight:600}
+.field input,.field textarea{width:100%;min-height:52px;padding:12px 14px;border:1.5px solid #CBC3C5;border-radius:8px;background:#fff;color:var(--ink);font:inherit;font-size:16px}
+.field textarea{min-height:96px;resize:vertical}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 3px rgba(192,28,45,.22)}
+.date-row{display:flex;flex-wrap:wrap;gap:8px}
+.date-row input{flex:1 1 180px;width:auto}
+.err{color:var(--red-ink);font-weight:600;font-size:.95rem}
+.form-nav{display:flex;justify-content:space-between;gap:10px;margin-top:6px}
+.form-nav .btn-red{margin-left:auto}
+.done{display:grid;gap:14px;justify-items:start}
+.done:focus{outline:none}
+.done .sum{padding:14px 16px;background:var(--paper);border-radius:8px;font-weight:500;width:100%}
+.side{display:grid;gap:12px;padding:24px;background:#000;color:#fff;border-radius:var(--r)}
+.side p{color:var(--mist)}
+.side .btn{width:100%}
+
+/* Subsol */
+.foot{background:#000;color:#d4cdce;padding-block:64px 28px;font-size:.95rem}
+.foot-grid{display:grid;gap:36px}
+@media (min-width:700px){.foot-grid{grid-template-columns:1fr 1fr}}
+@media (min-width:1100px){.foot-grid{grid-template-columns:1.3fr 1fr .8fr .9fr}}
+.foot-brand{display:grid;gap:14px;align-content:start}
+.foot-brand img{height:34px;width:auto}
+.tagline{color:#fff;font-weight:500}
+.foot h2{font:700 1rem/1.3 var(--body);letter-spacing:0;color:#fff;margin-bottom:14px}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.foot a{text-decoration:none;color:#d4cdce}
+.foot a:hover{color:#fff;text-decoration:underline}
+.foot ul a{display:inline-flex;align-items:center;gap:10px}
+.foot ul .i{width:18px;height:18px;color:var(--red-hi)}
+.foot .hours dt{color:var(--mist)}
+.foot .hours dd{color:#fff;font-weight:500}
+.foot-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;margin-top:48px;padding-top:20px;border-top:1px solid var(--line-dk);color:var(--mist);font-size:.86rem}
+.foot-bottom span{display:flex;flex-wrap:wrap;gap:8px 20px}
+
+/* ===== Versiunea 2: „Bordul mașinii” ===== */
+
+/* Atingere: răspuns scurt la apăsare */
+.chip,.opt span,.mbar a,.light{transition:transform 160ms var(--ease-out),background-color 160ms,border-color 160ms,color 160ms;-webkit-tap-highlight-color:transparent}
+.btn:active,.chip:active,.opt span:active,.mbar a:active,.light:active{transform:scale(.97)}
+
+/* Trecerea între pagini: fade scurt, antetul și bara de jos stau pe loc */
+@view-transition{navigation:auto}
+::view-transition-old(root),::view-transition-new(root){animation-duration:180ms}
+.top{view-transition-name:top}
+.mbar{view-transition-name:mbar}
+@media (prefers-reduced-motion:reduce){@view-transition{navigation:none}}
+
+/* Meniul de pe telefon și răspunsurile FAQ nu mai apar brusc */
+.menu{transition:opacity 200ms var(--ease-out),translate 200ms var(--ease-out)}
+@starting-style{.menu{opacity:0;translate:0 -8px}}
+.faq details::details-content{block-size:0;overflow-y:clip;transition:block-size 220ms var(--ease-out),content-visibility 220ms allow-discrete}
+.faq details[open]::details-content{block-size:auto}
+
+/* Martorii de bord din hero */
+.is-red{--lamp:var(--lamp-red)}
+.is-amber{--lamp:var(--amber)}
+.lights{display:grid;gap:10px;width:100%;max-width:600px}
+.lights-row{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px}
+.light{display:grid;justify-items:center;gap:5px;padding:9px 2px;border:1px solid rgba(255,255,255,.12);border-radius:10px;background:rgba(10,8,9,.55);color:#857c7e;text-decoration:none}
+.light > span:last-child{display:none;font-size:.66rem;font-weight:600;line-height:1.1;color:#c9c1c3;text-align:center}
+.lamp{position:relative;display:block;width:26px;height:26px;flex:none}
+.lamp .i{width:100%;height:100%;stroke-width:1.6}
+.lamp .lit{position:absolute;inset:0;color:var(--lamp);filter:drop-shadow(0 0 5px var(--lamp));opacity:0;transition:opacity 160ms var(--ease-out)}
+.lamp.on .lit{opacity:1}
+.light:focus-visible .lit{opacity:.9}
+@media (hover:hover) and (pointer:fine){.light:hover{border-color:rgba(255,255,255,.3)}.light:hover .lit{opacity:.9}}
+.lights-q{font-size:.93rem;font-weight:500;color:#ece6e7}
+@media (min-width:600px){.lights-row{gap:8px}.lamp{width:30px;height:30px}.light > span:last-child{display:block}}
+/* Contactul: toți martorii se aprind și se sting, o dată pe sesiune */
+.ignite .lit{animation:ignite 1020ms linear backwards;animation-delay:calc(120ms + var(--i) * 30ms)}
+@keyframes ignite{0%{opacity:0}12%{opacity:1}71%{opacity:1}100%{opacity:0}}
+
+/* Foaia martorului: urcă de jos pe telefon, fereastră centrată pe desktop */
+.sheet{position:fixed;inset:auto 0 0;margin:0;width:100%;max-width:none;max-height:88dvh;padding:0;border:0;border-radius:20px 20px 0 0;background:#0e0c0d;color:#fff;overflow:auto;overscroll-behavior:contain;transform:translateY(100%);transition:transform 250ms var(--ease-out),overlay 250ms allow-discrete,display 250ms allow-discrete}
+.sheet[open]{transform:translateY(0);transition:transform 350ms var(--ease-drawer),overlay 350ms allow-discrete,display 350ms allow-discrete}
+@starting-style{.sheet[open]{transform:translateY(100%)}}
+.sheet::backdrop{background:rgba(0,0,0,.62);opacity:0;transition:opacity 200ms var(--ease-out),overlay 200ms allow-discrete,display 200ms allow-discrete}
+.sheet[open]::backdrop{opacity:1}
+@starting-style{.sheet[open]::backdrop{opacity:0}}
+.sheet-in{position:relative;display:grid;gap:18px;padding:30px max(20px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px))}
+.sheet-in::before{content:"";position:absolute;top:10px;left:50%;width:44px;height:5px;margin-left:-22px;border-radius:3px;background:#3a3436}
+.sheet-x{position:absolute;top:16px;right:14px;z-index:1;display:grid;place-items:center;width:44px;height:44px;border:0;border-radius:50%;background:#1f1b1c;color:#fff;cursor:pointer}
+.sheet-more{color:var(--mist);font-weight:600;font-size:.95rem}
+@media (min-width:900px){
+  .sheet{inset:0;margin:auto;max-width:560px;height:fit-content;border-radius:20px;opacity:0;transform:scale(.96);transition:transform 200ms var(--ease-out),opacity 200ms var(--ease-out),overlay 200ms allow-discrete,display 200ms allow-discrete}
+  .sheet[open]{opacity:1;transform:none;transition:transform 200ms var(--ease-out),opacity 200ms var(--ease-out),overlay 200ms allow-discrete,display 200ms allow-discrete}
+  @starting-style{.sheet[open]{opacity:0;transform:scale(.96)}}
+  .sheet-in{padding:32px}
+  .sheet-in::before{display:none}
+}
+
+/* Fișa unui martor, în foaie și pe pagina /martori-de-bord/ */
+.m-card{display:grid;gap:14px;align-content:start}
+.m-head{display:flex;align-items:center;gap:16px;padding-right:52px}
+.m-head .lamp{width:48px;height:48px}
+.m-head h2{margin-top:6px;font:700 1.25rem/1.2 var(--display);letter-spacing:-.01em}
+.urg{display:inline-block;padding:3px 10px;border-radius:999px;background:color-mix(in srgb,var(--lamp) 18%,transparent);color:var(--lamp);font-size:.78rem;font-weight:700}
+.m-card p{color:#d8d1d3;line-height:1.55}
+.m-card p b{color:#fff}
+.mgrid{display:grid;gap:14px}
+@media (min-width:800px){.mgrid{grid-template-columns:repeat(2,1fr)}}
+.mgrid .m-card{padding:22px;border:1px solid var(--line-dk);border-radius:var(--r);background:#0d0b0c;scroll-margin-top:calc(var(--top) + 24px)}
+.mgrid .m-head{padding-right:0}
+.mgrid .m-card:target{border-color:var(--lamp)}
+.legend{display:flex;flex-wrap:wrap;gap:8px}
+.lg{display:inline-flex;align-items:center;gap:9px;padding:6px 12px;border:1px solid #332d2f;border-radius:999px;background:#151112;font-size:.9rem}
+.lg::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--c);box-shadow:0 0 8px var(--c)}
+.lg-red{--c:var(--lamp-red)}
+.lg-amber{--c:var(--amber)}
+
+/* Oferta sezonului: cardul urcă peste marginea hero-ului */
+.offer-wrap{position:relative;z-index:2;margin-top:-30px}
+.offer{display:grid;gap:12px;padding:20px;border:1px solid var(--line);border-left:6px solid var(--red);border-radius:var(--r);background:#fff;text-decoration:none;box-shadow:0 14px 34px -20px rgba(0,0,0,.45);transition:transform 160ms var(--ease-out)}
+.offer:active{transform:scale(.99)}
+.offer-tag{justify-self:start;padding:3px 10px;border-radius:999px;background:var(--red-soft);color:var(--red-ink);font-size:.78rem;font-weight:700}
+.offer-t b{display:block;font:700 1.12rem/1.25 var(--display);letter-spacing:-.01em}
+.offer-t span{display:block;margin-top:4px;color:var(--steel)}
+.offer-p{font-weight:700;font-size:1.05rem}
+.offer .btn{justify-self:start}
+@media (min-width:900px){.offer{grid-template-columns:auto 1fr auto auto;align-items:center;gap:24px;padding:22px 28px}}
+
+/* Cele 4 servicii cerute des: plăci mari, pe telefon se derulează cu degetul */
+.tiles{display:grid;grid-auto-flow:column;grid-auto-columns:78%;gap:12px;margin-bottom:16px;padding-bottom:4px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.tiles::-webkit-scrollbar{display:none}
+.tile{position:relative;display:block;overflow:hidden;border-radius:var(--r);background:#000;color:#fff;text-decoration:none;scroll-snap-align:start}
+.tile img{width:100%;aspect-ratio:4/5;object-fit:cover;transition:transform 300ms var(--ease-out)}
+.tile-b{position:absolute;inset:auto 0 0;display:grid;gap:4px;padding:18px;background:linear-gradient(transparent,rgba(0,0,0,.9) 48%)}
+.tile-b b{font:700 1.15rem/1.2 var(--display);letter-spacing:-.01em}
+.tile-b span{color:#ddd6d7;font-size:.9rem;line-height:1.35}
+.tile-b .tile-p{color:#fff;font-weight:700;font-size:.95rem}
+@media (hover:hover) and (pointer:fine){.tile:hover img{transform:scale(1.03)}}
+@media (min-width:1000px){.tiles{grid-auto-flow:row;grid-template-columns:repeat(4,1fr);overflow:visible}}
+
+/* „Sună-mă înapoi”: un singur câmp */
+.cb{display:grid;gap:10px;max-width:540px}
+.cb-t b{display:block;margin-bottom:2px}
+.cb-row{display:flex;gap:8px}
+.cb input[type=tel]{flex:1;min-width:0;min-height:52px;padding:12px 14px;border:1.5px solid transparent;border-radius:8px;background:#fff;color:var(--ink);font:inherit;font-size:16px}
+.cb input[type=tel]:focus{outline:3px solid #fff;outline-offset:1px}
+.cb .btn{min-height:52px;background:var(--ink);color:#fff;white-space:nowrap}
+.cb .btn:hover{background:#000}
+.cb-light input[type=tel]{border-color:#CBC3C5}
+.cb-light input[type=tel]:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 3px rgba(192,28,45,.22)}
+.cb-light .btn{background:var(--red)}
+.cb-light .btn:hover{background:var(--red-hi)}
+.cb-err{font-weight:600;font-size:.93rem}
+.cb-done{font-weight:600}
+.hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;opacity:0}
+.cta-act{display:grid;gap:20px}
+.cta-band .cb-t{color:#ffe3e6}
+.cta-band .cb-err{color:#fff}
+.plist + .cb{max-width:none;margin-top:28px;padding:20px;border-radius:var(--r);background:var(--paper)}
+.side .cb-t{color:var(--mist)}
+.side .cb-err{color:#ff8a96}
+
+/* Vremea din Chișinău, live */
+.wx{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding:12px 14px;border:1px solid #2f2a2b;border-radius:12px;background:#0f0d0e}
+.wx-t{display:inline-flex;align-items:center;gap:9px;font-weight:700;color:#fff}
+.wx-t::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--go);box-shadow:0 0 0 4px rgba(34,163,92,.2)}
+.wx-tip{flex:1 1 220px;color:var(--mist);font-size:.95rem}
+
+/* Programarea: turometrul arată pasul */
+.book-main{min-width:0}
+.form-top{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.gauge svg{display:block;width:92px;height:auto;overflow:visible}
+.g-track,.g-red,.g-ticks{fill:none;stroke-linecap:round}
+.g-track{stroke:var(--line);stroke-width:7}
+.g-red{stroke:var(--red);stroke-width:7}
+.g-ticks{stroke:var(--steel);stroke-width:2}
+.g-needle{transform-box:view-box;transform-origin:60px 60px;transform:rotate(var(--a,-60deg));transition:transform 450ms var(--ease-out)}
+.g-needle path{stroke:var(--ink);stroke-width:3.5;stroke-linecap:round}
+.g-needle circle{fill:var(--ink)}
+.g-txt{font-weight:700}
+.js .step.on{animation:stepin 220ms var(--ease-out)}
+@keyframes stepin{from{opacity:0;transform:translateX(12px)}}
+.chosen{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;padding:10px 14px;border-radius:8px;background:var(--paper);font-weight:600}
+.link{appearance:none;justify-self:start;padding:4px 0;border:0;background:none;color:var(--red-ink);font:600 .95rem var(--body);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.more-opts summary{display:inline-block;padding:6px 0;color:var(--red-ink);font-weight:600;cursor:pointer;list-style:none}
+.more-opts summary::-webkit-details-marker{display:none}
+.more-opts summary::after{content:" +"}
+.more-opts[open] summary::after{content:" −"}
+.more-opts .opts{margin-top:10px}
+.field .date-other{max-width:260px}
+.done-check{width:56px;height:56px}
+.done-check circle{fill:none;stroke:var(--go);stroke-width:3}
+.done-check path{fill:none;stroke:var(--go);stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:40;stroke-dashoffset:40;animation:draw 600ms var(--ease-out) 150ms forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.done-check path{stroke-dashoffset:0}}
+
+/* Bara de jos: pe /programare/ are 3 butoane și dispare cât e deschisă tastatura */
+.mbar-3{grid-template-columns:repeat(3,1fr)}
+.typing .mbar{display:none}
+
+/* WhatsApp fix pe desktop */
+.wa-float{display:none}
+@media (min-width:1100px){
+  .wa-float{position:fixed;right:max(24px,env(safe-area-inset-right,0px));bottom:24px;z-index:45;display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:#1FA855;color:#fff;box-shadow:0 10px 24px -8px rgba(0,0,0,.45);transition:transform 160ms var(--ease-out)}
+  .wa-float .i{width:28px;height:28px}
+  .wa-float:active{transform:scale(.95)}
+}
+
+/* Propunerea versiunii în rusă */
+.lang-hint{display:flex;align-items:center;justify-content:center;gap:6px;padding:4px 6px 4px 16px;background:#1a1617;color:#fff;font-size:.9rem}
+.lang-hint a{text-decoration:none}
+.lang-hint b{margin-left:6px;color:var(--red-hi)}
+.lang-hint button{display:grid;place-items:center;width:40px;height:40px;border:0;background:none;color:#fff;cursor:pointer}
+
+/* Ghidul martorilor, primul în blog */
+.posts .card-guide{background:#000;color:#fff;border-color:#000}
+.guide-lamps{display:flex;flex-wrap:wrap;gap:16px;padding:30px 20px;background:#0e0c0d}
+.guide-lamps .lamp{width:38px;height:38px}
+.card-guide .card-b > span:last-child{color:var(--mist)}
+
+/* Subsolul: AUTOREPUBLIC uriaș, doar contur */
+.foot-word{margin-top:56px}
+.foot-word svg{display:block;width:100%;height:auto}
+.foot-word text{font-family:var(--display);font-weight:800;font-size:100px;fill:none;stroke:#3d3638;stroke-width:1.3}
+.foot-tag{margin-top:10px;color:#fff;font-weight:500}
