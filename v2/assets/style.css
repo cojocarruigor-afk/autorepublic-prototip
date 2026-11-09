@@ -1,11 +1,11 @@
 /* AutoRepublic: stil pornit de la telefon.
    Brandul: roșul din logo pe negru pur, ca în pozele de pe social. Motivul vizual: dunga oblică roșie de pe colantul mașinii. */
-@font-face{font-family:"Onest";font-style:normal;font-weight:400 700;font-display:swap;src:url(fonts/onest-cyrillic.woff2) format("woff2");unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116}
-@font-face{font-family:"Onest";font-style:normal;font-weight:400 700;font-display:swap;src:url(fonts/onest-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
-@font-face{font-family:"Unbounded";font-style:normal;font-weight:700 800;font-display:swap;src:url(fonts/unbounded-cyrillic.woff2) format("woff2");unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116}
-@font-face{font-family:"Unbounded";font-style:normal;font-weight:700 800;font-display:swap;src:url(fonts/unbounded-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
-@font-face{font-family:"Onest";font-style:normal;font-weight:400 700;font-display:swap;src:url(fonts/onest-latin-ext.woff2) format("woff2");unicode-range:U+0102-0103,U+015E-015F,U+0162-0163,U+0218-021B}
-@font-face{font-family:"Unbounded";font-style:normal;font-weight:700 800;font-display:swap;src:url(fonts/unbounded-latin-ext.woff2) format("woff2");unicode-range:U+0102-0103,U+015E-015F,U+0162-0163,U+0218-021B}
+@font-face{font-family:"Onest";font-style:normal;font-weight:400 700;font-display:swap;src:url(/assets/fonts/onest-cyrillic.woff2) format("woff2");unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116}
+@font-face{font-family:"Onest";font-style:normal;font-weight:400 700;font-display:swap;src:url(/assets/fonts/onest-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:"Unbounded";font-style:normal;font-weight:700 800;font-display:swap;src:url(/assets/fonts/unbounded-cyrillic.woff2) format("woff2");unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116}
+@font-face{font-family:"Unbounded";font-style:normal;font-weight:700 800;font-display:swap;src:url(/assets/fonts/unbounded-latin.woff2) format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:"Onest";font-style:normal;font-weight:400 700;font-display:swap;src:url(/assets/fonts/onest-latin-ext.woff2) format("woff2");unicode-range:U+0102-0103,U+015E-015F,U+0162-0163,U+0218-021B}
+@font-face{font-family:"Unbounded";font-style:normal;font-weight:700 800;font-display:swap;src:url(/assets/fonts/unbounded-latin-ext.woff2) format("woff2");unicode-range:U+0102-0103,U+015E-015F,U+0162-0163,U+0218-021B}
 [hidden]{display:none!important}
 
 :root{
@@ -44,6 +44,10 @@ img{max-width:100%;height:auto;display:block}
 a{color:inherit}
 p{margin:0}
 h1,h2,h3{margin:0;text-wrap:balance}
+p,li{text-wrap:pretty}
+.nw{white-space:nowrap}
+.cb-done,.cb-err,.err{animation:msg-in 170ms var(--ease-out)}
+@keyframes msg-in{from{opacity:0;transform:translateY(4px)}}
 h1,h2{font-family:var(--display);font-weight:700;line-height:1.08;letter-spacing:-.025em}
 h1{font-size:clamp(2rem,6.6vw,3.4rem)}
 h2{font-size:clamp(1.45rem,4.4vw,2.3rem)}
@@ -82,6 +86,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .top-in{display:flex;align-items:center;gap:12px;height:var(--top)}
 .logo{display:block;flex:none}
 .logo img{height:30px;width:auto}
+@media (max-width:379px){.logo img{height:26px}}   /* la 360 px antetul încape cu tot cu meniul */
 .nav{display:none;gap:2px;margin-left:auto}
 .nav a{padding:8px 12px;border-radius:6px;text-decoration:none;font-weight:500;color:#e8e2e3}
 .nav a:hover{color:#fff;background:#1d191a}
@@ -91,7 +96,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .tel span{display:none}
 .lang{display:inline-grid;place-items:center;min-width:40px;min-height:36px;padding:0 8px;border:1px solid #3a3436;border-radius:6px;font-size:.82rem;font-weight:600;text-decoration:none;color:#e8e2e3}
 .lang:hover{border-color:#fff;color:#fff}
-.top .btn{display:none}
+.top-act .btn{display:none}
 .menu-btn{display:grid;place-items:center;width:44px;height:44px;margin-right:-8px;border:0;background:none;color:#fff;cursor:pointer}
 .menu-btn .i{width:26px;height:26px}
 .menu-btn[aria-expanded="true"] .i-open,.menu-btn[aria-expanded="false"] .i-close{display:none}
@@ -101,18 +106,31 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .menu nav a .i{color:var(--red-hi)}
 .menu-act{display:grid;gap:10px}
 @media (min-width:480px){.tel span{display:inline}}
-@media (min-width:760px){.top .btn{display:inline-flex;margin-left:6px}}
-@media (min-width:1100px){
-  .nav{display:flex}
-  .top-act{margin-left:12px}
+@media (min-width:760px){.top-act .btn{display:inline-flex;margin-left:6px}}
+@media (min-width:1100px){body{padding-bottom:0}}
+/* Antetul pe laptop: logo și meniul la stânga, la dreapta contactul (telefon, WhatsApp, Viber), programarea și limba */
+@media (min-width:1200px){
+  .nav{display:flex;margin-left:36px}
+  .nav a{padding:8px 11px}
   .menu-btn,.menu{display:none}
-  body{padding-bottom:0}
+}
+/* Limba: pe telefon doar cealaltă limbă; pe laptop comutator RO | RU, cu limba curentă marcată */
+.lang-sw{display:inline-flex;order:-1}
+.lang-sw .on{display:none}
+@media (min-width:760px){
+  .lang-sw{order:0;align-items:center;gap:2px;margin-left:10px;padding:2px;border:1px solid #3a3436;border-radius:8px}
+  .lang-sw .on,.lang-sw .lang{display:inline-grid;place-items:center;min-width:34px;min-height:30px;padding:0 6px;border:0;border-radius:6px;font-size:.78rem;font-weight:700;letter-spacing:.04em}
+  .lang-sw .on{background:#fff;color:#000}
+  .lang-sw .lang:hover{background:#1d191a}
+  /* contactul iese în evidență: cercuri pline în culoarea fiecărui canal */
+  .tel{gap:10px;padding:0 6px 0 0;font-size:1.02rem}
+  .tel .i{box-sizing:content-box;width:18px;height:18px;padding:8px;border-radius:50%;background:var(--red);color:#fff}
 }
 
 /* Bara de contact rapid, fixă jos pe telefon */
-.mbar{position:fixed;inset:auto 0 0;z-index:45;display:grid;grid-template-columns:1fr 1fr 1fr 1.35fr;background:#000;border-top:1px solid #241f20;padding:0 env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
-.mbar a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:62px;color:#fff;text-decoration:none;font-size:.74rem;font-weight:600}
-.mbar a+a{border-left:1px solid #241f20}
+.mbar{position:fixed;inset:auto 0 0;z-index:45;display:grid;grid-auto-flow:column;grid-auto-columns:1fr;background:#000;border-top:1px solid #241f20;padding:0 env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
+.mbar > a,.mbar > button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:62px;padding:0;border:0;background:none;color:#fff;text-decoration:none;font:600 .74rem/1.2 var(--body);cursor:pointer}
+.mbar > * + *{border-left:1px solid #241f20}
 .mbar .i{width:22px;height:22px}
 .mbar .mbar-main{background:var(--red);border-left:0}
 @media (min-width:1100px){.mbar{display:none}}
@@ -128,10 +146,11 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .hero-bg{position:absolute;inset:0;z-index:-2}
 .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:35% 30%}
 .hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1) 0%,rgba(0,0,0,.5) 28%,rgba(0,0,0,.9) 52%,#000 78%)}
-.hero-in{display:grid;gap:18px;justify-items:start;padding-block:clamp(170px,40vw,280px) 96px}
+.hero-in{display:grid;gap:18px;justify-items:start;padding-block:clamp(72px,18vw,280px) 96px}
 .hero .status{color:#ece6e7}
-.hero h1{font-size:clamp(2.5rem,10.5vw,5.4rem);font-weight:800;line-height:.98;letter-spacing:-.035em;max-width:9.5ch}
-.hero-lead{font-size:clamp(1.12rem,3.8vw,1.4rem);line-height:1.45;max-width:30ch;color:#f1ebec}
+.hero h1{display:grid;gap:14px}
+.h1-big{display:block;max-width:14ch;font-size:clamp(2.05rem,8.6vw,3.5rem);font-weight:800;line-height:1.02;letter-spacing:-.03em}
+.h1-kw{display:block;max-width:34ch;font:500 clamp(1.12rem,4vw,1.4rem)/1.35 var(--body);letter-spacing:0;color:#f1ebec}
 .hero-cta{display:grid;gap:10px;width:100%;margin-top:4px}
 .hero-facts{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px 20px;color:#d6cfd1;font-size:.95rem}
 .hero-facts li{display:flex;align-items:center;gap:8px}
@@ -205,14 +224,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .card-b > span:last-child{color:var(--steel);font-size:.94rem;line-height:1.45}
 
 /* Sezon */
-.season{background:#000;color:#fff;clip-path:polygon(0 32px,100% 0,100% calc(100% - 32px),0 100%);padding-block:clamp(80px,11vw,128px)}
-.season-in{display:grid;gap:32px;align-items:center}
-.season-txt{display:grid;gap:16px;justify-items:start}
-.season-txt > p{color:var(--mist);max-width:44ch}
-.season-range{color:var(--red-hi)!important;font-weight:600}
-.season .slash{margin-block:4px 8px}
-.season-img img{border-radius:var(--r);width:100%;aspect-ratio:3/2;object-fit:cover}
-@media (min-width:900px){.season-in{grid-template-columns:1fr 1.1fr;gap:56px}}
+.season-range{color:var(--red-ink);font-weight:600}
 
 /* Pașii vizitei: secvență reală, de aceea numerotați */
 .steps{list-style:none;margin:0;padding:0;display:grid;gap:18px;counter-reset:s}
@@ -301,7 +313,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .crumbs a{text-decoration:none}
 .crumbs a:hover{color:#fff;text-decoration:underline}
 .phero-grid{display:grid;gap:28px;align-items:center}
-.phero-txt{display:grid;gap:18px;justify-items:start}
+.phero-txt{display:grid;gap:18px;justify-items:start;min-width:0}
+.phero h1{overflow-wrap:anywhere;hyphens:auto}   /* cuvintele lungi din rusă („конфиденциальности”) nu mai lățesc pagina */
 .phero .lead{font-size:1.1rem;line-height:1.55;color:#e6e0e1;max-width:62ch}
 .phero-img img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--r)}
 .mchips{display:flex;flex-wrap:wrap;gap:8px}
@@ -322,16 +335,6 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .note{color:var(--steel);font-size:.95rem;margin-top:24px}
 
 /* Echipa */
-.team{display:grid;gap:14px}
-@media (min-width:760px){.team{grid-template-columns:repeat(3,1fr)}}
-.person{display:grid;grid-template-columns:64px 1fr;gap:14px;align-items:center;padding:18px;background:#fff;border:1px solid var(--line);border-radius:var(--r)}
-.avatar{width:64px;height:64px;border-radius:50%;background:var(--paper);display:grid;place-items:center;color:var(--mist)}
-.avatar .i{width:30px;height:30px}
-.person span{display:block;color:var(--steel);font-size:.92rem}
-.amen{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.amen li{display:flex;align-items:center;gap:10px;padding:14px;background:#fff;border:1px solid var(--line);border-radius:10px;font-weight:500;line-height:1.3}
-.amen .i{color:var(--red);flex:none}
-@media (min-width:900px){.amen{grid-template-columns:repeat(3,1fr)}}
 
 /* Contact */
 .ways{display:grid;gap:12px}
@@ -360,7 +363,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .svc-box p{color:var(--steel)}
 
 /* Programare */
-.book{display:grid;gap:24px;align-items:start}
+.book{display:grid;grid-template-columns:minmax(0,1fr);gap:24px;align-items:start}
 @media (min-width:980px){.book{grid-template-columns:1.6fr 1fr;gap:40px}}
 .form,.done{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:clamp(18px,4vw,32px)}
 .step{border:0;margin:0;padding:0;min-width:0;display:grid;gap:18px}
@@ -369,7 +372,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .hint{color:var(--steel);font-size:.9rem}
 .opts{display:flex;flex-wrap:wrap;gap:8px}
 .opt{position:relative}
-.opt input{position:absolute;opacity:0;width:1px;height:1px}
+.opts .opt input{position:absolute;opacity:0;width:1px;height:1px;min-height:0;padding:0;border:0}   /* mai tare decât .field input: altfel bulina invizibilă acoperă butonul vecin */
+.opt input:disabled + span{opacity:.38;text-decoration:line-through;cursor:not-allowed}
 .opt span{display:inline-flex;align-items:center;min-height:46px;padding:10px 15px;border:1.5px solid var(--line);border-radius:999px;background:#fff;font-weight:500;cursor:pointer;user-select:none}
 .opt span:hover{border-color:var(--ink)}
 .opt input:checked + span{background:var(--ink);border-color:var(--ink);color:#fff}
@@ -390,7 +394,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .done .sum{padding:14px 16px;background:var(--paper);border-radius:8px;font-weight:500;width:100%}
 .side{display:grid;gap:12px;padding:24px;background:#000;color:#fff;border-radius:var(--r)}
 .side p{color:var(--mist)}
-.side .btn{width:100%}
+.side > .btn{width:100%}
+.side .hours dt{color:var(--mist)}
 
 /* Subsol */
 .foot{background:#000;color:#d4cdce;padding-block:64px 28px;font-size:.95rem}
@@ -414,8 +419,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 /* ===== Versiunea 2: „Bordul mașinii” ===== */
 
 /* Atingere: răspuns scurt la apăsare */
-.chip,.opt span,.mbar a,.light{transition:transform 160ms var(--ease-out),background-color 160ms,border-color 160ms,color 160ms;-webkit-tap-highlight-color:transparent}
-.btn:active,.chip:active,.opt span:active,.mbar a:active,.light:active{transform:scale(.97)}
+.chip,.opt span,.mbar > *,.light{transition:transform 160ms var(--ease-out),background-color 160ms,border-color 160ms,color 160ms;-webkit-tap-highlight-color:transparent}
+.btn:active,.chip:active,.opt span:active,.mbar > :active,.light:active{transform:scale(.97)}
 
 /* Trecerea între pagini: fade scurt, antetul și bara de jos stau pe loc */
 @view-transition{navigation:auto}
@@ -433,10 +438,10 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 /* Martorii de bord din hero */
 .is-red{--lamp:var(--lamp-red)}
 .is-amber{--lamp:var(--amber)}
-.lights{display:grid;gap:10px;width:100%;max-width:600px}
-.lights-row{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px}
-.light{display:grid;justify-items:center;gap:5px;padding:9px 2px;border:1px solid rgba(255,255,255,.12);border-radius:10px;background:rgba(10,8,9,.55);color:#857c7e;text-decoration:none}
-.light > span:last-child{display:none;font-size:.66rem;font-weight:600;line-height:1.1;color:#c9c1c3;text-align:center}
+.lights{display:grid;gap:10px;width:100%;max-width:720px}
+.lights-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.light{display:grid;justify-items:center;align-content:center;gap:6px;min-height:64px;padding:9px 2px;border:1px solid rgba(255,255,255,.14);border-radius:10px;background:rgba(10,8,9,.6);color:#b9b0b2;text-decoration:none}
+.light > span:last-child{font-size:.75rem;font-weight:600;line-height:1.1;color:#d6cfd1;text-align:center}
 .lamp{position:relative;display:block;width:26px;height:26px;flex:none}
 .lamp .i{width:100%;height:100%;stroke-width:1.6}
 .lamp .lit{position:absolute;inset:0;color:var(--lamp);filter:drop-shadow(0 0 5px var(--lamp));opacity:0;transition:opacity 160ms var(--ease-out)}
@@ -444,10 +449,13 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .light:focus-visible .lit{opacity:.9}
 @media (hover:hover) and (pointer:fine){.light:hover{border-color:rgba(255,255,255,.3)}.light:hover .lit{opacity:.9}}
 .lights-q{font-size:.93rem;font-weight:500;color:#ece6e7}
-@media (min-width:600px){.lights-row{gap:8px}.lamp{width:30px;height:30px}.light > span:last-child{display:block}}
-/* Contactul: toți martorii se aprind și se sting, o dată pe sesiune */
-.ignite .lit{animation:ignite 1020ms linear backwards;animation-delay:calc(120ms + var(--i) * 30ms)}
-@keyframes ignite{0%{opacity:0}12%{opacity:1}71%{opacity:1}100%{opacity:0}}
+@media (min-width:760px){.lights-row{grid-template-columns:repeat(8,minmax(0,1fr))}.lamp{width:30px;height:30px}}
+/* Contactul, o dată pe sesiune: toate becurile se aprind deodată, apoi se sting pe grupe,
+   ca la testul real de la bord (galbenele la 520 ms, roșiile la 680 ms) */
+.ignite .lit{animation:bulb-a 680ms backwards;animation-delay:calc(var(--i) * 8ms)}
+.ignite .is-red .lit{animation-name:bulb-r;animation-duration:840ms}
+@keyframes bulb-a{0%{opacity:0;animation-timing-function:linear}9%{opacity:1}76%{opacity:1;animation-timing-function:cubic-bezier(.23,1,.32,1)}100%{opacity:0}}
+@keyframes bulb-r{0%{opacity:0;animation-timing-function:linear}7%{opacity:1}81%{opacity:1;animation-timing-function:cubic-bezier(.23,1,.32,1)}100%{opacity:0}}
 
 /* Foaia martorului: urcă de jos pe telefon, fereastră centrată pe desktop */
 .sheet{position:fixed;inset:auto 0 0;margin:0;width:100%;max-width:none;max-height:88dvh;padding:0;border:0;border-radius:20px 20px 0 0;background:#0e0c0d;color:#fff;overflow:auto;overscroll-behavior:contain;transform:translateY(100%);transition:transform 250ms var(--ease-out),overlay 250ms allow-discrete,display 250ms allow-discrete}
@@ -457,7 +465,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .sheet[open]::backdrop{opacity:1}
 @starting-style{.sheet[open]::backdrop{opacity:0}}
 .sheet-in{position:relative;display:grid;gap:18px;padding:30px max(20px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px))}
-.sheet-in::before{content:"";position:absolute;top:10px;left:50%;width:44px;height:5px;margin-left:-22px;border-radius:3px;background:#3a3436}
+.sheet .status{padding-right:52px}
 .sheet-x{position:absolute;top:16px;right:14px;z-index:1;display:grid;place-items:center;width:44px;height:44px;border:0;border-radius:50%;background:#1f1b1c;color:#fff;cursor:pointer}
 .sheet-more{color:var(--mist);font-weight:600;font-size:.95rem}
 @media (min-width:900px){
@@ -465,7 +473,6 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   .sheet[open]{opacity:1;transform:none;transition:transform 200ms var(--ease-out),opacity 200ms var(--ease-out),overlay 200ms allow-discrete,display 200ms allow-discrete}
   @starting-style{.sheet[open]{opacity:0;transform:scale(.96)}}
   .sheet-in{padding:32px}
-  .sheet-in::before{display:none}
 }
 
 /* Fișa unui martor, în foaie și pe pagina /martori-de-bord/ */
@@ -473,7 +480,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .m-head{display:flex;align-items:center;gap:16px;padding-right:52px}
 .m-head .lamp{width:48px;height:48px}
 .m-head h2{margin-top:6px;font:700 1.25rem/1.2 var(--display);letter-spacing:-.01em}
-.urg{display:inline-block;padding:3px 10px;border-radius:999px;background:color-mix(in srgb,var(--lamp) 18%,transparent);color:var(--lamp);font-size:.78rem;font-weight:700}
+.urg{display:inline-block;padding:3px 10px;border-radius:999px;background:color-mix(in srgb,var(--u) 18%,transparent);color:var(--u);font-size:.78rem;font-weight:700}
+.urg-stop{--u:var(--lamp-red)}.urg-today{--u:#FF8A3D}.urg-soon{--u:var(--amber)}   /* culoarea urmează urgența, nu becul */
 .m-card p{color:#d8d1d3;line-height:1.55}
 .m-card p b{color:#fff}
 .mgrid{display:grid;gap:14px}
@@ -488,7 +496,9 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .lg-amber{--c:var(--amber)}
 
 /* Oferta sezonului: cardul urcă peste marginea hero-ului */
-.offer-wrap{position:relative;z-index:2;margin-top:-30px}
+.offer-wrap{padding-block:clamp(40px,7vw,64px)}
+.offer-wrap .wrap{display:grid;gap:12px}
+.guide{display:grid;gap:32px}   /* /martori-de-bord/: rândul de martori e cuprinsul ghidului */
 .offer{display:grid;gap:12px;padding:20px;border:1px solid var(--line);border-left:6px solid var(--red);border-radius:var(--r);background:#fff;text-decoration:none;box-shadow:0 14px 34px -20px rgba(0,0,0,.45);transition:transform 160ms var(--ease-out)}
 .offer:active{transform:scale(.99)}
 .offer-tag{justify-self:start;padding:3px 10px;border-radius:999px;background:var(--red-soft);color:var(--red-ink);font-size:.78rem;font-weight:700}
@@ -514,7 +524,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .cb{display:grid;gap:10px;max-width:540px}
 .cb-t b{display:block;margin-bottom:2px}
 .cb-row{display:flex;gap:8px}
-.cb input[type=tel]{flex:1;min-width:0;min-height:52px;padding:12px 14px;border:1.5px solid transparent;border-radius:8px;background:#fff;color:var(--ink);font:inherit;font-size:16px}
+.cb input[type=tel]{flex:1;width:0;min-width:0;min-height:52px;padding:12px 14px;border:1.5px solid transparent;border-radius:8px;background:#fff;color:var(--ink);font:inherit;font-size:16px}
 .cb input[type=tel]:focus{outline:3px solid #fff;outline-offset:1px}
 .cb .btn{min-height:52px;background:var(--ink);color:#fff;white-space:nowrap}
 .cb .btn:hover{background:#000}
@@ -546,7 +556,9 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .g-track{stroke:var(--line);stroke-width:7}
 .g-red{stroke:var(--red);stroke-width:7}
 .g-ticks{stroke:var(--steel);stroke-width:2}
-.g-needle{transform-box:view-box;transform-origin:60px 60px;transform:rotate(var(--a,-60deg));transition:transform 450ms var(--ease-out)}
+.g-needle{transform-box:view-box;transform-origin:60px 60px;transform:rotate(var(--a,-60deg));transition:transform 520ms cubic-bezier(.34,1.56,.64,1)}
+.g-red{transition:stroke 300ms var(--ease-out)}
+.gauge.is-done .g-red{stroke:var(--go)}   /* „gata” nu stă în zona roșie */
 .g-needle path{stroke:var(--ink);stroke-width:3.5;stroke-linecap:round}
 .g-needle circle{fill:var(--ink)}
 .g-txt{font-weight:700}
@@ -566,9 +578,17 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 @keyframes draw{to{stroke-dashoffset:0}}
 @media (prefers-reduced-motion:reduce){.done-check path{stroke-dashoffset:0}}
 
-/* Bara de jos: pe /programare/ are 3 butoane și dispare cât e deschisă tastatura */
-.mbar-3{grid-template-columns:repeat(3,1fr)}
+/* Bara de jos dispare cât e deschisă tastatura */
 .typing .mbar{display:none}
+
+/* „Scrie”: WhatsApp, Viber sau Messenger, deasupra barei de jos */
+.scrie{position:fixed;inset:auto 12px calc(74px + env(safe-area-inset-bottom,0px));margin:0;width:auto;max-width:460px;padding:16px;border:1px solid var(--line-dk);border-radius:16px;background:#0e0c0d;color:#fff;box-shadow:0 18px 40px -12px rgba(0,0,0,.6);transition:opacity 180ms var(--ease-out),transform 180ms var(--ease-out),overlay 180ms allow-discrete,display 180ms allow-discrete}
+.scrie:popover-open{display:grid;gap:8px}
+@starting-style{.scrie:popover-open{opacity:0;transform:translateY(8px)}}
+.scrie::backdrop{background:rgba(0,0,0,.45)}
+.scrie p{margin:0 0 4px;font-weight:700}
+.scrie a{display:flex;align-items:center;gap:12px;min-height:52px;padding:0 14px;border-radius:10px;background:#1a1617;color:#fff;text-decoration:none;font-weight:600}
+.scrie a .i{width:22px;height:22px}
 
 /* WhatsApp fix pe desktop */
 .wa-float{display:none}
@@ -595,3 +615,189 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .foot-word svg{display:block;width:100%;height:auto}
 .foot-word text{font-family:var(--display);font-weight:800;font-size:100px;fill:none;stroke:#3d3638;stroke-width:1.3}
 .foot-tag{margin-top:10px;color:#fff;font-weight:500}
+
+/* Telefonul cu WhatsApp și Viber lângă el: același număr, confirmat de Igor pe 09.11.2026 */
+.phone-line{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px}
+.pl-tel{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-right:4px;font-weight:700;font-size:1.05rem;color:inherit;text-decoration:none;font-variant-numeric:tabular-nums}
+.pl-tel .i{width:20px;height:20px}
+.pl-ic{display:inline-grid;place-items:center;flex:none;width:44px;height:44px;border:0;border-radius:50%;background:var(--b);color:#fff;transition:filter 160ms,transform 160ms var(--ease-out)}
+.pl-ic:hover{filter:brightness(1.12);transform:translateY(-1px)}
+.pl-ic .i{width:22px;height:22px}
+.pl-wa{--b:#1FAF54}.pl-vb{--b:#7360F2}   /* culorile canalelor, ca în antet */
+.pl-note{flex-basis:100%;font-size:.86rem;color:var(--steel)}
+.pl-dark .pl-note{color:var(--mist)}
+.cta-band .pl-note{color:#ffe3e6}
+.top-msg{display:none}
+/* În antet iconițele stau ca telefonul: fără cerc alb, aceeași culoare; culoarea mărcii apare doar la hover */
+@media (min-width:760px){
+  .top-msg{display:inline-flex;align-items:center;gap:6px}
+  .top-msg .pl-ic{width:34px;height:34px;border:0;background:var(--b);color:#fff;transition:transform 160ms var(--ease-out),filter 160ms}
+  .top-msg .pl-wa{--b:#1FAF54}.top-msg .pl-vb{--b:#7360F2}
+  .top-msg .pl-ic .i{width:19px;height:19px}
+  .top-msg .pl-ic:hover{filter:brightness(1.12);transform:translateY(-1px)}
+}
+.tt-v{position:absolute;left:6px;right:6px;bottom:6px;padding:3px 6px;border-radius:6px;background:rgba(0,0,0,.62);color:#fff;font-size:.72rem;font-weight:600;line-height:1.3;text-align:center}
+
+/* Primul ecran: programarea rapidă după lucrare */
+.quick{display:grid;gap:10px;width:100%;margin-top:2px}
+.quick-h{font-weight:600;color:#ece6e7}
+.quick-row{display:flex;flex-wrap:wrap;gap:8px}
+.quick-row a{display:inline-flex;align-items:center;min-height:44px;padding:8px 14px;border:1px solid rgba(255,255,255,.3);border-radius:999px;background:rgba(10,8,9,.6);color:#fff;font-weight:600;font-size:.95rem;text-decoration:none;transition:border-color 160ms,background-color 160ms,transform 160ms var(--ease-out)}
+.quick-row a:hover{border-color:#fff;background:#1d191a}
+.quick-row a:active{transform:scale(.97)}
+.quick-row .q-dunno{border-color:var(--red-hi)}
+/* „Ai o problemă la mașină?”: martorii, imediat sub primul ecran */
+.problem-in{display:grid;gap:4px}
+.offer-tt{display:inline-flex;align-items:center;gap:8px;justify-self:start;min-height:44px;color:var(--red-ink);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.offer-tt .i{width:18px;height:18px}
+
+/* Prețuri: prețul fix, taburi pe categorii, carduri de servicii */
+.pwrap{display:grid;gap:28px}
+.ptrust{list-style:none;margin:4px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px 20px;color:#e3dcdd;font-weight:500}
+.ptrust li{display:flex;align-items:center;gap:8px}
+.ptrust .i{width:18px;height:18px;color:var(--red-hi)}
+.pfix{display:grid;gap:12px;padding:20px;border-left:6px solid var(--red);border-radius:var(--r);background:#0e0c0d;color:#fff}
+.pfix-tag{justify-self:start;padding:3px 10px;border-radius:999px;background:var(--red);font-size:.78rem;font-weight:700}
+.pfix-t b{display:block;font:700 1.15rem/1.25 var(--display);letter-spacing:-.01em}
+.pfix-t span{display:block;margin-top:4px;color:var(--mist)}
+.pfix-p{font:800 1.9rem/1 var(--display);font-variant-numeric:tabular-nums}
+.pfix .btn{justify-self:start}
+@media (min-width:900px){.pfix{grid-template-columns:auto 1fr auto auto;align-items:center;gap:24px;padding:22px 28px}}
+.ptabs{position:sticky;top:calc(var(--top) + env(safe-area-inset-top,0px));z-index:5;display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none;margin-inline:-16px;padding:10px 16px;background:var(--white);border-bottom:1px solid var(--line)}
+.ptabs::-webkit-scrollbar{display:none}
+.ptab{flex:none;scroll-snap-align:start;display:inline-flex;align-items:center;min-height:44px;padding:8px 16px;border:1.5px solid var(--line);border-radius:999px;background:#fff;color:var(--ink);font-weight:600;white-space:nowrap;text-decoration:none;transition:background-color 160ms,border-color 160ms,color 160ms}
+.ptab:hover{border-color:var(--ink)}
+.ptab[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.ppanel{display:grid;gap:16px;scroll-margin-top:calc(var(--top) + 84px)}
+.ppanel h2{font-size:1.35rem;letter-spacing:-.01em}
+.pcards{display:grid;gap:14px}
+@media (min-width:900px){.pcards{grid-template-columns:1fr 1fr;gap:18px}}
+.pcard{display:grid;gap:14px;align-content:start;padding:18px;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+.pcard-h{display:flex;align-items:center;gap:12px}
+.pcard-ic{display:grid;place-items:center;flex:none;width:44px;height:44px;border-radius:50%;background:var(--red-soft);color:var(--red-ink)}
+.pcard-ic .i{width:22px;height:22px}
+.pcard h3{font:700 1.08rem/1.25 var(--display);letter-spacing:-.01em}
+.pcard h3 a{color:inherit;text-decoration:none}
+.pcard h3 a:hover{color:var(--red-ink)}
+.pcard .plist li{padding:12px 0}
+.pmissing{display:grid;gap:14px;padding:22px;border-radius:var(--r);background:var(--paper)}
+.pmissing h2{font-size:1.3rem}
+
+/* Paginile interioare: dungile colantului în cap, ca pe homepage */
+.phero{position:relative;isolation:isolate;overflow:hidden;padding-block:24px 96px}
+.phero .livery{bottom:40px;width:min(55vw,640px)}
+@media (min-width:900px){.phero{padding-block:28px 112px}}
+.sec-tight{padding-top:32px}
+/* Subsol: iconițele WhatsApp și Viber rămân albe pe cercul colorat */
+/* „De ce AutoRepublic”: carduri cu iconiță */
+.why{gap:14px}
+.why > div{padding:20px;border:0;border-radius:var(--r);background:var(--paper)}
+.why-ic{display:grid;place-items:center;width:44px;height:44px;margin-bottom:4px;border-radius:50%;background:var(--red);color:#fff}
+.why-ic .i{width:22px;height:22px}
+/* Contact: „Te sunăm noi” lângă titlu, canalele ca plăci colorate */
+.phero-cb{display:grid;gap:12px;padding:22px;border:1px solid var(--line-dk);border-radius:var(--r);background:#141112}
+.phero-cb h2{font-size:1.3rem}
+.pl-big .pl-tel{font-size:1.4rem}
+.ways{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:900px){.ways{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.way{gap:8px;align-content:start}
+.way-ic{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--wc,var(--ink));color:#fff}
+.way-ic .i{width:23px;height:23px;color:#fff}
+.way-tel{--wc:var(--red)}.way-wa{--wc:#1FAF54}.way-vb{--wc:#7360F2}.way-ms{--wc:#0A7CFF}.way-mail{--wc:var(--ink)}.way-tt{--wc:#000}
+/* Blog: serviciul și minutele pe carduri; în articol, cuprinsul */
+.card-meta{display:block;margin-bottom:4px;color:var(--red-ink);font-size:.82rem;font-weight:600}
+.card-guide .card-meta{color:var(--red-hi)}
+.toc{padding:18px 20px;border-radius:var(--r);background:var(--paper)}
+.toc ol{margin:8px 0 0;padding-left:1.2em;display:grid;gap:6px}
+.toc a{color:var(--ink);text-underline-offset:3px}
+.article h2{scroll-margin-top:calc(var(--top) + 20px)}
+.pcard .row{align-items:center;gap:10px 18px}
+.pcard-more{display:inline-flex;align-items:center;min-height:44px;color:var(--ink);font-weight:600;text-underline-offset:3px}
+.pcard-more:hover{color:var(--red-ink)}
+
+/* ===== Paginile interioare: lumea bordului ===== */
+/* Capul paginii: negru cu o lumină roșie caldă în dreapta, ca bordul noaptea */
+.phero{background:radial-gradient(55% 75% at 88% 30%,rgba(192,28,45,.30),transparent 70%),#000}
+.phero-side{display:grid;gap:16px;align-content:start}
+
+/* Cadranul: acul urcă o dată, cu un mic recul, și se oprește pe o valoare reală */
+.dial{position:relative;display:grid;justify-items:center;gap:6px;width:100%;max-width:400px;padding:22px 22px 24px;border:1px solid #2b2627;border-radius:22px;background:radial-gradient(70% 60% at 50% 78%,rgba(192,28,45,.22),transparent 70%),#0b090a;color:#fff;text-align:center;box-shadow:0 30px 60px -35px rgba(192,28,45,.55)}
+.dial > svg{width:100%;max-width:300px;overflow:visible}
+.dial-track{fill:none;stroke:#2e2829;stroke-width:10;stroke-linecap:round}
+.dial-red{fill:none;stroke:var(--red);stroke-width:10;stroke-linecap:round;filter:drop-shadow(0 0 6px rgba(255,70,70,.55))}
+.dial-ticks{fill:none;stroke:#8a8183;stroke-width:2.5;stroke-linecap:round}
+.dial-needle{transform-box:view-box;transform-origin:120px 120px;transform:rotate(var(--to));animation:dial-sweep 1100ms cubic-bezier(.34,1.56,.64,1) .25s both}
+.dial-needle path{stroke:var(--lamp-red);stroke-width:4.5;stroke-linecap:round;filter:drop-shadow(0 0 6px rgba(255,70,70,.75))}
+.dial-needle circle{fill:#fff;stroke:#0b090a;stroke-width:3}
+@keyframes dial-sweep{from{transform:rotate(-90deg)}}
+.dial-v{margin-top:-6px;font:800 clamp(2.3rem,8vw,3.2rem)/1 var(--display);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.dial-l{max-width:28ch;color:#cfc7c9;font-size:.95rem;line-height:1.4}
+.dial .btn{margin-top:10px}
+.dial-live.is-open .dial-v{color:#3ddc84;text-shadow:0 0 18px rgba(61,220,132,.45)}
+.dial-live.is-closed .dial-v{color:var(--lamp-red)}
+/* Despre: cadranul mic, peste colțul pozei, ca un instrument de bord */
+.dial-over{position:relative}
+.dial-sm{position:relative;max-width:230px;margin:-70px 0 0 16px;padding:14px 14px 16px;border-radius:18px}
+.dial-sm svg{max-width:160px}
+.dial-sm .dial-v{font-size:1.9rem}
+.dial-sm .dial-l{font-size:.82rem}
+@media (min-width:900px){.dial-sm{position:absolute;left:-28px;bottom:-28px;margin:0}}
+
+/* Taburile de la Prețuri: comutatoare de bord, cu becul aprins pe cel activ */
+.ptab::before{content:"";flex:none;width:8px;height:8px;margin-right:9px;border-radius:50%;background:#cfc8c9;transition:background-color 200ms,box-shadow 200ms}
+.ptab[aria-selected="true"]::before{background:var(--lamp-red);box-shadow:0 0 0 3px rgba(255,70,70,.18),0 0 10px 2px rgba(255,70,70,.65)}
+.js .ppanel:not([hidden]){animation:panel-in 280ms var(--ease-out)}
+@keyframes panel-in{from{opacity:0;transform:translateY(10px)}}
+
+/* Carduri vii: se ridică la hover, iconița se aprinde, poza se apropie */
+@media (hover:hover) and (pointer:fine){
+  .pcard,.way,.posts .card,.why > div{transition:transform 240ms var(--ease-out),box-shadow 240ms var(--ease-out),border-color 160ms}
+  .pcard:hover,.way:hover,.posts .card:hover,.why > div:hover{transform:translateY(-4px);box-shadow:0 22px 44px -26px rgba(22,18,20,.5)}
+  .posts .card img{transition:transform 700ms var(--ease-out)}
+  .posts .card:hover img{transform:scale(1.05)}
+  .way-ic,.why-ic,.pcard-ic{transition:box-shadow 240ms var(--ease-out)}
+  .way:hover .way-ic{box-shadow:0 0 0 7px color-mix(in srgb,var(--wc,var(--ink)) 20%,transparent)}
+  .why > div:hover .why-ic,.pcard:hover .pcard-ic{box-shadow:0 0 0 7px rgba(192,28,45,.16)}
+}
+
+/* La derulare, cardurile urcă în pagină (doar unde browserul știe, și niciodată cu „mișcare redusă”) */
+@supports (animation-timeline:view()){
+  @media (prefers-reduced-motion:no-preference){
+    .why > div,.pcard,.way,.posts .card,.steps li,.pmissing,.toc,.tt-tiles a{animation:rise-in linear both;animation-timeline:view();animation-range:entry 0% entry 55%}
+  }
+}
+@keyframes rise-in{from{opacity:0;transform:translateY(28px) scale(.98)}}
+
+/* Blog: ghidul martorilor, card mare pe toată lățimea */
+@media (min-width:760px){.posts .card-guide{grid-column:1/-1}}
+@media (max-width:759px){.dial > svg{max-width:210px}.dial-v{font-size:2.3rem}}
+
+/* Despre, „De ce AutoRepublic”: bordul. Patru cifre ca martorii (se aprind și numără la derulare), motivele numerotate */
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:12px}
+@media (min-width:900px){.stats{grid-template-columns:repeat(4,1fr)}}
+.stat{position:relative;padding:20px 16px 22px;border-radius:var(--r);background:linear-gradient(160deg,#1c1517,#0b0a0a);border:1px solid var(--line-dk);overflow:hidden}
+.stat::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--red-hi);box-shadow:0 0 18px 2px rgba(219,38,57,.7)}
+.stat b{display:block;font:800 clamp(2rem,7vw,3.1rem)/1 var(--display);letter-spacing:-.03em;font-variant-numeric:tabular-nums;text-shadow:0 0 26px rgba(219,38,57,.45);white-space:nowrap}
+.stat span{display:block;margin-top:10px;color:var(--mist);line-height:1.35}
+.stats.lamps .stat b,.stats.lamps .stat::after{transition:opacity .5s,text-shadow .9s,box-shadow .9s}
+.stats.lamps:not(.is-on) .stat b{opacity:.25;text-shadow:none}
+.stats.lamps:not(.is-on) .stat::after{opacity:.2;box-shadow:none}
+.stats.lamps .stat:nth-child(2) b,.stats.lamps .stat:nth-child(2)::after{transition-delay:.15s}
+.stats.lamps .stat:nth-child(3) b,.stats.lamps .stat:nth-child(3)::after{transition-delay:.3s}
+.stats.lamps .stat:nth-child(4) b,.stats.lamps .stat:nth-child(4)::after{transition-delay:.45s}
+.why-sec .why > div{position:relative;overflow:hidden;background:rgba(255,255,255,.04);border:1px solid var(--line-dk)}
+.why-sec .why h3{color:#fff;padding-right:52px}
+.why-sec .why p{color:var(--mist)}
+.why-sec .why-ic{background:rgba(219,38,57,.14);color:var(--red-hi);box-shadow:inset 0 0 0 1px rgba(219,38,57,.55)}
+.why-n{position:absolute;top:14px;right:16px;font:800 2.4rem/1 var(--display);color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.22)}
+.why-sec .why > div::before{content:"";position:absolute;left:0;top:0;width:100%;height:3px;background:var(--red-hi);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease-out)}
+.why-sec .why > div:hover::before{transform:scaleX(1)}
+@media (min-width:700px) and (max-width:1099px){.why-sec .why > div:last-child{grid-column:1/-1}}
+@media (min-width:1100px){.why-sec .why{grid-template-columns:repeat(5,1fr)}}
+@media (max-width:699px){
+  .why-sec .why{grid-auto-flow:column;grid-auto-columns:84%;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;scrollbar-width:none}
+  .why-sec .why::-webkit-scrollbar{display:none}
+  .why-sec .why > div{scroll-snap-align:start;animation:none}
+}
+/* Subsol: numărul mare, apoi WhatsApp și Viber ca rânduri, la fel ca Messenger */
+.foot .foot-tel{font-weight:700;font-size:1.1rem;color:#fff;font-variant-numeric:tabular-nums}

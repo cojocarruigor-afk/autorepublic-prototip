@@ -41,6 +41,41 @@
     el.classList.add(st.open ? 'is-open' : 'is-closed');
   });
 
+  // Contact: cadranul live. Acul arată cât din ziua de lucru a trecut; textul spune când închidem sau când deschidem
+  const lamps = $('[data-lamps]');
+  if (lamps && !reduced && 'IntersectionObserver' in window) {
+    const nums = [...lamps.querySelectorAll('b')].map(b => [b, b.textContent.match(/^(\d+)(\+?)$/)]).filter(x => x[1] && +x[1][1] > 0);
+    nums.forEach(([b, m]) => { b.textContent = '0' + m[2]; });
+    lamps.classList.add('lamps');
+    const io = new IntersectionObserver(([en]) => {
+      if (!en.isIntersecting) return;
+      io.disconnect(); lamps.classList.add('is-on');
+      const t0 = performance.now();
+      const tick = now => { const k = Math.min(1, (now - t0) / 1100), ease = 1 - Math.pow(1 - k, 3);
+        nums.forEach(([b, m]) => { b.textContent = Math.round(+m[1] * ease) + m[2]; });
+        if (k < 1) requestAnimationFrame(tick); };
+      requestAnimationFrame(tick);
+    }, { threshold: 0.4 });
+    io.observe(lamps);
+  }
+
+  const live = $('[data-live]');
+  if (live) {
+    const T = JSON.parse(live.dataset.live), st = openState(), now = chisinauNow();
+    const v = $('.dial-v', live), l = $('.dial-l', live);
+    if (st.open) {
+      const o = HOURS[now.day], left = Math.max(0, Math.round((st.close - now.h) * 60));
+      live.style.setProperty('--to', Math.round(-90 + 180 * (now.h - o[0]) / (o[1] - o[0])) + 'deg');
+      v.textContent = T.dial_open;
+      l.textContent = T.dial_left.replace('{h}', Math.floor(left / 60)).replace('{m}', left % 60);
+    } else {
+      live.style.setProperty('--to', '-90deg');
+      v.textContent = T.dial_closed;
+      l.textContent = T.dial_opens.replace('{d}', whenLabel(T.open, st)).replace('{t}', hhmm(st.at));
+    }
+    live.classList.add(st.open ? 'is-open' : 'is-closed');
+  }
+
   // De unde a venit vizitatorul (Google Ads, TikTok…): pleacă împreună cu cererea
   const SRC = 'ar_src';
   try {
@@ -56,18 +91,27 @@
     if (data.website) return;                       // capcana pentru roboți a fost completată: nu trimitem nimic
     delete data.website;
     const payload = { form: name, ...data, limba: lang, pagina: location.href, sursa: source() };
-    if (form.dataset.endpoint) {
-      const r = await fetch(form.dataset.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(payload) });
-      if (!r.ok) throw new Error(r.status);
-    }
+    // Fără endpoint (prototip) nu pleacă nimic și nu numărăm nicio conversie
+    if (!form.dataset.endpoint) return;
+    const r = await fetch(form.dataset.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(payload) });
+    if (!r.ok) throw new Error(r.status);
     // Conversia pentru Google Ads / GA4, doar după răspunsul OK (TRACKING-pentru-programatori.md)
     push({ event: 'form_submit_success', form_name: name });
   };
 
-  // Meniul de pe telefon
+  // Atingerea se vede și pe iPhone: Safari aplică :active doar dacă pagina ascultă touchstart
+  document.addEventListener('touchstart', () => {}, { passive: true });
+
+  // „Scrie” din bara de jos: alegerea între WhatsApp, Viber și Messenger (popover nativ);
+  // în browserele fără popover, butonul deschide direct WhatsApp
+  const scrie = $('[data-scrie]');
+  if (scrie && !HTMLElement.prototype.hasOwnProperty('popover')) scrie.addEventListener('click', () => { location.href = scrie.dataset.scrie; });
+
+  // Meniul de pe telefon: se deschide sub antet, oricât de jos l-ar împinge banda pentru rusă
   const menuBtn = $('.menu-btn'), menu = $('#menu');
   if (menuBtn && menu) {
     const set = open => {
+      if (open) menu.style.top = Math.max(0, $('.top').getBoundingClientRect().bottom) + 'px';
       menu.hidden = !open;
       menuBtn.setAttribute('aria-expanded', open);
       document.body.classList.toggle('no-scroll', open);
@@ -100,8 +144,10 @@
     ss.set('ar_ign', '1');
   }
   if (lights && sheet) {
+    const sheetCb = $('.sheet-cb', sheet);
     const open = id => {
       $$('.m-card', sheet).forEach(a => { a.hidden = a.dataset.m !== id; });
+      if (sheetCb) sheetCb.hidden = openState().open;   // închis: „te sunăm mâine la 09:00”
       sheet.setAttribute('aria-labelledby', 'mt-' + id);
       sheet.showModal();
       push({ event: 'martor_select', martor: id });
@@ -126,9 +172,35 @@
       if (p.getBoundingClientRect().bottom > innerHeight) p.scrollIntoView({ block: 'nearest', behavior: reduced ? 'auto' : 'smooth' });
       push({ event: 'symptom_select', symptom: btns.find(b => b.dataset.sym === id).textContent.trim() });
     };
-    btns.forEach(b => b.addEventListener('click', () => show(b.dataset.sym, true)));
-    if (btns.length) show(btns[0].dataset.sym, false);
+    btns.forEach(b => b.addEventListener('click', () => show(b.dataset.sym, true)));   // nimic ales dinainte: alege omul
   });
+
+  // Prețuri: taburi pe categorii; fără JavaScript toate grupurile rămân vizibile, unul sub altul
+  const ptabs = $('[data-ptabs]');
+  if (ptabs) {
+    const tabs = $$('.ptab', ptabs), panels = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
+    const pick = (i, byUser) => {
+      tabs.forEach((t, k) => { t.setAttribute('aria-selected', k === i); t.tabIndex = k === i ? 0 : -1; });
+      panels.forEach((p, k) => { p.hidden = k !== i; });
+      if (!byUser) return;
+      history.replaceState(null, '', '#' + panels[i].id);
+      tabs[i].scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: reduced ? 'auto' : 'smooth' });
+      push({ event: 'price_tab', tab: panels[i].id });
+    };
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', ev => { ev.preventDefault(); pick(i, true); });
+      t.addEventListener('keydown', ev => {
+        const d = { ArrowRight: 1, ArrowLeft: -1 }[ev.key];
+        if (!d) return;
+        ev.preventDefault();
+        const j = (i + d + tabs.length) % tabs.length;
+        pick(j, true); tabs[j].focus();
+      });
+    });
+    const fromHash = () => { const h = panels.findIndex(p => '#' + p.id === location.hash); if (h >= 0 || !location.hash) pick(Math.max(h, 0), false); };
+    fromHash();
+    addEventListener('hashchange', fromHash);   // un link spre /preturi/#roti de pe aceeași pagină
+  }
 
   // Harta Google se încarcă doar la cerere: pagina rămâne ușoară
   $$('[data-map]').forEach(btn => btn.addEventListener('click', () => {
@@ -174,7 +246,7 @@
   $$('[data-cb]').forEach(form => {
     const T = JSON.parse(form.dataset.cb), st = openState();
     const closed = k => T[k].replace('{d}', whenLabel(T.open, st)).replace('{t}', hhmm(st.at));
-    if (!st.open) $('[data-cb-text]', form).textContent = closed('cb_closed');
+    if (!st.open) $('[data-cb-text]', form).innerHTML = closed('cb_closed');   // textele vin din build.py, gata de HTML
     const err = $('.cb-err', form);
     form.addEventListener('submit', async e => {
       e.preventDefault();
@@ -187,7 +259,7 @@
       btn.disabled = true;
       try {
         await sendLead(form, 'callback', { telefon: tel.value.trim(), serviciu: form.dataset.service, website: form.elements.website.value });
-        const ok = Object.assign(document.createElement('p'), { className: 'cb-done', textContent: st.open ? T.cb_ok_open : closed('cb_ok_closed') });
+        const ok = Object.assign(document.createElement('p'), { className: 'cb-done', innerHTML: st.open ? T.cb_ok_open : closed('cb_ok_closed') });
         ok.setAttribute('role', 'status');
         form.replaceChildren(ok);
       } catch {
@@ -208,14 +280,22 @@
   const err = msg => { const e = $('.err', steps[cur]); e.textContent = msg; e.hidden = !msg; };
   const setGauge = i => {
     gauge.style.setProperty('--a', ANGLE[i] + 'deg');
+    gauge.classList.toggle('is-done', i === 3);
     if (i < 3) stepTxt.textContent = M.step.replace('{n}', i + 1);
     else stepTxt.hidden = true;
   };
   const chosen = () => $$('input[name=servicii]:checked', form).map(c => c.nextElementSibling.textContent.trim()).join(', ');
+  // „Frâne · marți, 10 noiembrie, ora 09:00”: ce a ales omul, repetat la pasul 3 și după trimitere
+  const summary = () => {
+    const ora = $('input[name=ora]:checked', form)?.value;
+    const day = date.value ? new Intl.DateTimeFormat(lang, { weekday: 'long', day: 'numeric', month: 'long' }).format(new Date(date.value + 'T12:00')) : '';
+    return [chosen(), day && ora ? `${day}, ${M.at} ${ora}` : day].filter(Boolean).join(' · ');
+  };
   const go = (i, byUser = true) => {
     cur = i;
     steps.forEach((s, k) => s.classList.toggle('on', k === i));
     if (i === 1) $('[data-chosen] span', form).textContent = chosen();
+    if (i === 2) $('[data-recap] span', form).textContent = summary();
     setGauge(i);
     if (!byUser) return;
     push({ event: 'booking_step', step: i + 1 });
@@ -231,12 +311,15 @@
     const after = iso === isoDay(new Date()) ? chisinauNow().h : -1;
     return times.map(t => parseInt(t.value, 10)).filter(h => h >= o[0] && h < o[1] && h > after);
   };
+  // Grila de ore stă pe loc: orele din program rămân vizibile, cele trecute doar se dezactivează,
+  // ca să nu se mute butoanele sub deget când schimbi ziua
   const syncTimes = () => {
     const ok = date.value ? free(date.value) : [];
+    const o = date.value ? HOURS[weekday(date.value)] : null;
     times.forEach(t => {
-      const on = ok.includes(parseInt(t.value, 10));
+      const h = parseInt(t.value, 10), on = ok.includes(h);
       t.disabled = !on;
-      t.closest('.opt').hidden = !on;
+      t.closest('.opt').hidden = !o || h < o[0] || h >= o[1];
       if (!on) t.checked = false;
     });
     err(date.value && !ok.length ? (HOURS[weekday(date.value)] ? M.full : M.sunday) : '');
@@ -295,7 +378,8 @@
     const when = new Intl.DateTimeFormat(lang, { weekday: 'long', day: 'numeric', month: 'long' }).format(new Date(d.data + 'T12:00')) + ', ' + d.ora;
     const box = $('#booking-done');
     $('h2', box).textContent = box.dataset.title.replace('{n}', d.nume.trim().split(/\s+/)[0]);
-    $('[data-sum]', box).textContent = `${names}. ${when}.`;
+    $('[data-sum]', box).textContent = summary();
+    $$('.side .cb').forEach(f => { f.hidden = true; });   // după trimitere nu mai cerem încă o dată telefonul
     const wa = $('[data-wa]', box);
     wa.href = wa.href.split('?')[0] + '?text=' + encodeURIComponent(M.wa.replace('{n}', d.nume.trim()).replace('{s}', names).replace('{w}', when) + (d.masina ? ` (${d.masina})` : ''));
     // Google Calendar: o oră, după ora Chișinăului; un link, nu un fișier de descărcat

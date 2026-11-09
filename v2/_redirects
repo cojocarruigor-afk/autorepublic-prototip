@@ -1,0 +1,13 @@
+# Redirect 301 de pe URL-urile site-ului vechi (format Netlify / Cloudflare Pages)
+/servicii/reparatii-mecanice  /servicii/reparatii-motor/  301
+/servicii/reparatii-electrice  /servicii/electrician-auto/  301
+/servicii/servicii-de-reparatie-pentru-transmisie-automata  /servicii/cutie-viteze/  301
+/servicii/diagnostice-auto  /servicii/diagnoza-auto/  301
+/servicii/servicii-pentru-climatizare  /servicii/aer-conditionat/  301
+/servicii/servicii-de-intretinere  /servicii/revizie-schimb-ulei/  301
+/servicii/reparatii-si-intretinere-anvelope  /servicii/anvelope/  301
+/servicii/verificari-periodice-si-inspectii-tehnice  /servicii/itp/  301
+/servicii/spalatorie-auto  /servicii/spalatorie-detailing/  301
+/servicii/reparatii-si-intretinere-caroserie  /servicii/caroserie/  301
+/contacteaza-ne  /contact/  301
+/termeni-conditii  /politica-confidentialitate/  301

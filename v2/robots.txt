@@ -1,0 +1,15 @@
+# Toate paginile sunt deschise pentru motoarele de căutare.
+# Roboții asistenților AI sunt permiși explicit, ca AutoRepublic să poată fi citat în răspunsuri.
+User-agent: *
+Allow: /
+
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: PerplexityBot
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://autorepublic.md/sitemap.xml
