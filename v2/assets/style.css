@@ -801,3 +801,9 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 }
 /* Subsol: numărul mare, apoi WhatsApp și Viber ca rânduri, la fel ca Messenger */
 .foot .foot-tel{font-weight:700;font-size:1.1rem;color:#fff;font-variant-numeric:tabular-nums}
+
+/* Bara de jos: Sună · WhatsApp · Viber · Programează-te */
+.mbar{grid-auto-flow:row;grid-template-columns:repeat(3,1fr)}
+.mbar:has(.mbar-main){grid-template-columns:1fr 1fr 1fr 1.5fr}
+.mbar-wa .i{color:#25D366}
+.mbar-vb .i{color:#8F7BFF}
