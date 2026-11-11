@@ -44,14 +44,21 @@
   // Contact: cadranul live. Acul arată cât din ziua de lucru a trecut; textul spune când închidem sau când deschidem
   const calc = $('[data-tcalc]');
   if (calc) {
-    const all = n => [...calc.querySelectorAll(n)], out = calc.querySelector('[data-total]');
+    const q = n => calc.querySelector(n), lei = ' ' + calc.dataset.lei, fmt = n => n.toLocaleString('ro-RO').replace(/\./g, ' ') + lei;
+    const lead = q('[data-l=main]').textContent.split(' · ')[0];
     const upd = () => {
-      const type = calc.querySelector('[name=tc-type]:checked').value;
-      all('[data-type]').forEach(l => { l.hidden = l.dataset.type !== type; });
-      let size = calc.querySelector(`[data-type="${type}"] [name=tc-size]:checked`);
-      if (!size) { size = calc.querySelector(`[data-type="${type}"] [name=tc-size]`); size.checked = true; }
-      const sum = +size.value + +calc.querySelector('[name=tc-geo]:checked').value + (calc.querySelector('[name=tc-storage]').checked ? +calc.querySelector('[name=tc-storage]').value : 0);
-      out.textContent = sum.toLocaleString('ro-RO').replace(/\./g, ' ') + ' ' + calc.dataset.lei;
+      const typeIn = q('[name=tc-type]:checked'), type = typeIn.value;
+      calc.querySelectorAll('[data-type]').forEach(l => { l.hidden = l.dataset.type !== type; });
+      let size = q(`[data-type="${type}"] [name=tc-size]:checked`);
+      if (!size) { size = q(`[data-type="${type}"] [name=tc-size]`); size.checked = true; }
+      const geo = q('[name=tc-geo]:checked'), st = q('[name=tc-storage]');
+      q('[data-l=main]').textContent = lead + ' · ' + typeIn.nextElementSibling.querySelector('b').textContent + ' ' + size.dataset.name;
+      q('[data-v=main]').textContent = fmt(+size.value);
+      q('[data-row=geo]').hidden = !+geo.value; q('[data-l=geo]').textContent = geo.dataset.name; q('[data-v=geo]').textContent = fmt(+geo.value);
+      q('[data-row=store]').hidden = !st.checked;
+      const tot = q('[data-total]');
+      tot.textContent = fmt(+size.value + +geo.value + (st.checked ? +st.value : 0));
+      tot.classList.remove('bump'); void tot.offsetWidth; tot.classList.add('bump');
     };
     calc.addEventListener('change', upd); upd();
   }
