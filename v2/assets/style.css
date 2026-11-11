@@ -809,7 +809,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .mbar-vb .i{color:#8F7BFF}
 
 /* Prețuri, Roți: calculatorul de anvelope */
-.tcalc{margin-top:18px;padding:22px;border-radius:var(--r);background:#000;color:#fff;display:grid;gap:16px}
+.tcalc{margin-top:4px;padding:22px;border-radius:var(--r);background:#000;color:#fff;display:grid;gap:16px}
 .tcalc h3{font:800 1.3rem/1.2 var(--display);margin:0}
 .tcalc > p{margin:0;color:var(--mist)}
 .tcalc fieldset{border:0;margin:0;padding:0;min-width:0}
