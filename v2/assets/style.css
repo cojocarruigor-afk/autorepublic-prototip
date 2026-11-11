@@ -861,3 +861,5 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .tc-all table{width:100%;margin-top:10px;border-collapse:collapse}
 .tc-all td{padding:6px 0;border-bottom:1px solid var(--line-dk)}
 .tc-all td + td{text-align:right;font-weight:700}
+.mbar > a{padding:0 4px;text-align:center;min-width:0}
+@media (max-width:389px){.mbar > a{font-size:.66rem}.mbar:has(.mbar-main){grid-template-columns:1fr 1.1fr 1fr 1.55fr}}
