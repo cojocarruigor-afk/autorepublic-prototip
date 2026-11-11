@@ -807,3 +807,27 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .mbar:has(.mbar-main){grid-template-columns:1fr 1fr 1fr 1.5fr}
 .mbar-wa .i{color:#25D366}
 .mbar-vb .i{color:#8F7BFF}
+
+/* Prețuri, Roți: calculatorul de anvelope */
+.tcalc{margin-top:18px;padding:22px;border-radius:var(--r);background:#000;color:#fff;display:grid;gap:16px}
+.tcalc h3{font:800 1.3rem/1.2 var(--display);margin:0}
+.tcalc > p{margin:0;color:var(--mist)}
+.tcalc fieldset{border:0;margin:0;padding:0;min-width:0}
+.tcalc legend{font-weight:700;margin-bottom:8px;padding:0}
+.tc-opts{display:flex;flex-wrap:wrap;gap:8px}
+.tc-opt input,.tc-check input{position:absolute;opacity:0;pointer-events:none}
+.tc-opt span{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--line-dk);cursor:pointer;font-weight:600}
+.tc-opt small,.tc-check small{color:var(--mist);font-weight:500}
+.tc-opt input:checked + span{background:var(--red);border-color:var(--red)}
+.tc-opt input:checked + span small{color:#ffe3e6}
+.tc-opt input:focus-visible + span,.tc-check input:focus-visible + span{outline:2px solid #fff;outline-offset:2px}
+.tc-check{position:relative;display:flex}
+.tc-check span{display:flex;align-items:center;gap:10px;cursor:pointer;font-weight:600;min-height:44px}
+.tc-check span::before{content:"";width:22px;height:22px;border-radius:6px;border:2px solid var(--mist);flex:none}
+.tc-check input:checked + span::before{background:var(--red);border-color:var(--red);box-shadow:inset 0 0 0 3px #000}
+.tc-total{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;padding-top:14px;border-top:1px solid var(--line-dk)}
+.tc-total b{font:800 clamp(1.8rem,6vw,2.4rem)/1 var(--display);font-variant-numeric:tabular-nums;color:#fff;text-shadow:0 0 22px rgba(219,38,57,.45)}
+.tc-all summary{cursor:pointer;color:var(--mist)}
+.tc-all table{width:100%;margin-top:10px;border-collapse:collapse}
+.tc-all td{padding:6px 0;border-bottom:1px solid var(--line-dk)}
+.tc-all td + td{text-align:right;font-weight:700}

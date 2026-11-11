@@ -42,6 +42,20 @@
   });
 
   // Contact: cadranul live. Acul arată cât din ziua de lucru a trecut; textul spune când închidem sau când deschidem
+  const calc = $('[data-tcalc]');
+  if (calc) {
+    const all = n => [...calc.querySelectorAll(n)], out = calc.querySelector('[data-total]');
+    const upd = () => {
+      const type = calc.querySelector('[name=tc-type]:checked').value;
+      all('[data-type]').forEach(l => { l.hidden = l.dataset.type !== type; });
+      let size = calc.querySelector(`[data-type="${type}"] [name=tc-size]:checked`);
+      if (!size) { size = calc.querySelector(`[data-type="${type}"] [name=tc-size]`); size.checked = true; }
+      const sum = +size.value + +calc.querySelector('[name=tc-geo]:checked').value + (calc.querySelector('[name=tc-storage]').checked ? +calc.querySelector('[name=tc-storage]').value : 0);
+      out.textContent = sum.toLocaleString('ro-RO').replace(/\./g, ' ') + ' ' + calc.dataset.lei;
+    };
+    calc.addEventListener('change', upd); upd();
+  }
+
   const lamps = $('[data-lamps]');
   if (lamps && !reduced && 'IntersectionObserver' in window) {
     const nums = [...lamps.querySelectorAll('b')].map(b => [b, b.textContent.match(/^(\d+)(\+?)$/)]).filter(x => x[1] && +x[1][1] > 0);
