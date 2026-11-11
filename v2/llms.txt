@@ -1,6 +1,6 @@
 # AutoRepublic
 
-> Service auto complet în Chișinău, Republica Moldova: diagnoză computerizată, reparații motor, frâne, suspensie, cutie de viteze, electrician auto, aer condiționat, anvelope și geometrie, testare tehnică, caroserie, spălătorie și asigurări auto, pentru aproape toate mărcile. Prețul reparației se comunică și se aprobă de client înainte de lucru.
+> Service auto complet în Chișinău, Republica Moldova: diagnostică computerizată, reparații motor, frâne, suspensie, cutie de viteze, electrician auto, aer condiționat, anvelope și geometrie, testare tehnică, caroserie, spălătorie și asigurări auto, pentru aproape toate mărcile. Prețul reparației se comunică și se aprobă de client înainte de lucru.
 
 - Adresa: str. Columna 170 (Parcul Industrial Tracom), Chișinău, Moldova
 - Telefon / WhatsApp / Viber: +37379448282
@@ -13,7 +13,7 @@
 
 ## Servicii
 
-- [Diagnoză auto](https://autorepublic.md/servicii/diagnoza-auto/): Citim erorile și găsim cauza, nu doar simptomul.
+- [Diagnostică auto](https://autorepublic.md/servicii/diagnoza-auto/): Citim erorile și găsim cauza, nu doar simptomul.
 - [Revizie și schimb de ulei](https://autorepublic.md/servicii/revizie-schimb-ulei/): Ulei, filtre și verificările de rutină, la intervalul corect.
 - [Reparații motor](https://autorepublic.md/servicii/reparatii-motor/): De la scurgeri de ulei la distribuție și reparații capitale.
 - [Frâne](https://autorepublic.md/servicii/frane/): Plăcuțe, discuri, etriere și lichid de frână.
