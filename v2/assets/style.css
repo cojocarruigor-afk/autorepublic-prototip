@@ -903,3 +903,16 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .bc-prep li{display:grid;grid-template-columns:46px 1fr;gap:2px 14px;align-items:center}
 .bc-prep li .bc-ic{grid-row:span 2}
 .bc-prep li > span:last-child{color:var(--steel);font-size:.95rem}
+
+.bc-pic{margin-top:12px;border-radius:14px;overflow:hidden;aspect-ratio:16/9}
+.bc-pic img{width:100%;height:100%;object-fit:cover;display:block}
+@media (max-width:699px){
+  .bc-checks{grid-template-columns:1fr 1fr;gap:8px}
+  .bc-check{padding:14px;gap:4px}
+  .bc-check > span:last-child{font-size:.86rem}
+  .bc-ic{width:40px;height:40px}
+  .bc-steps li{padding-left:54px}
+  .bc-n{width:38px;height:38px}
+  .bc-steps li::before{left:17px;top:38px}
+  .bc-extra,.bc-prep,.bc-get{padding:18px}
+}
